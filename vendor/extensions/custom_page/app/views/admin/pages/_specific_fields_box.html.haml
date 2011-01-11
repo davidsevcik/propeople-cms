@@ -1,0 +1,8 @@
+#specific_fields
+  %h3 Parametry
+  %table#specific_field_list
+    - @fields.attributes.each do |key, value|
+      - unless %w{id page_id}.include?(key)
+        %tr{:id => "#{key}_field"}
+          %th= label_tag "page[#{key}]", @fields.class.human_attribute_name(key)
+          %td= text_field_tag "page[#{key}]", value, :size => 40

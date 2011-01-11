@@ -1,0 +1,330 @@
+---
+cz: 
+  account: 'Konto'
+  activerecord:
+    errors:
+      messages:
+        blank: 'povinné' # required
+        invalid: 'neplatný formát' #invalid_format
+        not_a_number: 'musí být číslo' # must be number
+        taken: 'toto jméno je již použito' # name_in_use
+        too_long: 'maximálně {{count}} znaků' # character_limit
+        too_short: 'mininálně {{count}} znaků' # character_minimum
+      models:
+        page:
+          attributes:
+            slug:
+              taken: 'název v URL je již použit jinou stránkou na stejné úrovni' # slug_in_use
+        user:
+          attributes:
+            email:
+              invalid: 'neplatný tvar e-mailové adresy' # invalid_email
+            login:
+              taken: 'přihlašovací jméno je již použito' # login already in use
+            password:
+              confirmation: 'musí se shodovat s potvrzením hesla' # password_confirmation
+              too_short: 'heslo je příliš krátké'
+        custom_field:
+          attributes:
+            name:
+              taken: 'už použito'
+  add_child: 'Přidat podstránku'
+  add_part: 'Přidat oddíl'
+  add_tab: 'Přidat záložku'
+  admin: 'Administrátor'
+  available_tags: 'Použitelné tagy'
+  available_tags_for: 'Tagy použitelné pro {{name}}'
+  body: 'Tělo'
+  breadcrumb: 'Název v menu'
+  buttons:
+    create: 'Vytvořit'
+    save_and_continue: 'Uložit a pokračovat v editaci'
+    save_changes: 'Uložit změny'
+  cancel: 'Storno'
+  change: 'Změnit'
+  close: 'Zavřít'
+  content: 'Obsah'
+  content_type: 'Content-Type'
+  creating_status: 'Tvorba {{model}}&#8230;'
+  date:
+    abbr_day_names: [Ne, Po, Út, St, Čt, Pá, So]
+    abbr_month_names: [~, leden, únor, březen, duben, květen, červen, červenec, srpen, září, říjen, listopad, prosinec]
+    day_names: [neděle, pondělí, úterý, středa, čtvrtek, pátek, sobota]
+    formats:
+      default: "%d.%m. %Y"
+      long: "%e. %B %Y"
+      only_day: "%e"
+      short: "%e. %b"
+    month_names: [~, leden, únor, březen, duben, květen, červen, červenec, srpen, září, říjen, listopad, prosinec]
+    order: [ :day, :month, :year ]
+  delete_layout: 'Smazat šablonu'
+  delete_pages: 'Smazat stránky'
+  delete_snippet: 'Smazat snippet'
+  delete_user: 'Smazat uživatele'
+  description: 'Popisek'
+  design: 'Design'
+  designer: 'Designer'
+  draft: 'Pracovní verze'
+  edit_layout: 'Editovat šablonu'
+  edit_page:  'Editovat stránku'
+  edit_snippet: 'Editovat snippet'
+  edit_user: 'Editovat uživatele'
+  email_address: 'E-mailová adresa'
+  extension: 'Rozšíření'
+  extensions: 'Rozšíření'
+  filter: 'Filtr'
+  hidden: 'Skrytý'
+  hide: 'Skrýt'
+  keywords: 'Klíčová slova'
+  language: 'Jazyk'
+  layout: 'Šablona'
+  layouts: 'Šablony'
+  log_out: 'Odhlásit'
+  logged_in_as: 'Přihlášený jako'
+  login: 'Přihlásit'
+  modify: 'Změnit'
+  more: 'Více'
+  name: 'Jméno'
+  new_homepage: 'Nová titulní stránka'
+  new_layout: 'Nová šablona'
+  new_page: 'Nová stránka'
+  new_password: 'Nové heslo'
+  new_snippet: 'Nový Snippet'
+  new_user: 'Nový uživatel'
+  no_layouts: 'Žádné šablony'
+  no_pages: 'Žádné stránky'
+  no_snippets: 'Žádné snippety'
+  notes: 'Poznámky'
+  optional: 'Volitelné'
+  or: 'nebo'
+  page: 'Stránka'
+  page_page: 'Oddíl stránky'
+  page_title: 'Titulek stránky'
+  page_type: 'Typ stránky'
+  pages: 'Stránky'
+  pages_controller:
+    removed_many: "Stránky byly smazány."
+    removed_one: "Stránka byly smazány."
+    saved: "Stránka byla uložena."
+  password: 'Heslo'
+  password_confirmation: 'Potvrzení hesla'
+  personal: 'Osobní'
+  personal_preferences: 'Osobní nastavení'
+  please_login: 'Prosím, přihlašte se'
+  powered_by: 'Běží na'
+  preferences: 'Osobní nastavení'
+  preferences_controller:
+    error_updating: 'Při ukládání vašeho nastavení nastala chyba.'
+    updated: 'Vaše nastavení bylo aktualizováno.'
+  published: 'Publikováno'
+  published_at: 'Publikováno'
+  published_on: 'Publikováno'
+  reference:  'Reference'
+  remember_me: 'Zapamatovat'
+  remember_me_in_this_browser: 'Zapamatovat v tomto prohlížeči'
+  remove: 'Smazat'
+  remove_layout: 'Smazat šablonu'
+  remove_page: 'Smazat stránku'
+  remove_pages: 'Smazat'
+  remove_snippet: 'Smazat snippet'
+  remove_tab: 'Smazat záložku'
+  remove_user: 'Smazat uživatele'
+  required: 'Vyžadováno'
+  resource_controller:
+    not_found: "{{humanized_model_name}} nebyl nalezen."
+    removed: "{{humanized_model_name}} byl smazán."
+    saved: "{{humanized_model_name}} byl uložen."
+    update_conflict: "{{humanized_model_name}} byl současně upraven jiných uživatelem. Změny nemohly být uloženy kvůli hrozící ztrátě dat."
+    validation_errors: "Některé položky ve fromuláři jsou zadány chybně."
+  reviewed: 'Ověřeno'
+  roles: 'Role'
+  saving_changes: Uložit změny
+  saving_preferences: uložit osobní nastavení
+  scheduled: "Naplánováno"
+  search_tags: 'Hledat tagy:'
+  select:
+    default: '<výchozí>'
+    inherit: '<zděděno>'
+    none: '<žádný>'
+    normal: '<normální>'
+  settings: 'Nastavení'
+  slug: 'Název v URL'
+  snippet: 'Snippet'
+  snippets: 'Snippety'
+  status: 'Stav'
+    # Warnings and info text:
+  testing: Testovací
+  text:
+    layouts:
+      remove_warning: 'Opravdu chcete <strong class="warning">smazat</strong> tuto šablonu?'
+    pages:
+      remove_warning: 'Opravdu chcete <strong class="warning">smazat</strong> tyto {{pages}}?'
+    snippets:
+      remove_warning: 'Opravdu chcete <strong class="warning">smazat</strong> tento snippet?'
+    users:
+      remove_warning: 'Opravdu chcete <strong class="warning">smazat</strong> tohoto uživatele?'
+  this_file_language: "Čeština"
+  time:
+    am: 'dop.'
+    formats:
+      datetime:
+        formats:
+          default: "%Y-%m-%dT%H:%M:%S%Z"
+      default: "%a %b %d %H:%M:%S %Z %Y"
+      long: "%B %d, %Y %H:%M"
+      only_second: "%S"
+      short: "%d %b %H:%M"
+      time: "%H:%M"
+      timestamp: "%H:%M - %e. %B %Y"
+    pm: 'odp.'
+  timestamp:
+    at: 'v'
+    by: ''
+    last_updated: 'Naposledy změnil'
+  user: 'Uživatel'
+  username: 'Uživatelské jméno'
+  username_or_email: 'Uživatelské jméno nebo e-mail'
+  users: 'Uživatelé'
+  users_controller:
+    cannot_delete_self: 'Nemůžete smazat sami sebe.'
+  version: 'Verze'
+  view_site: 'Zobrazit web'
+  website: 'Web'
+  welcome_controller:
+    invalid_user: 'Neplatné uživatelské jméno / e-mail nebo heslo.'
+    logged_out: 'Byl/a jste odhlášen/a.'
+  site: 'Tento web'
+  show_in_menu: 'Zobrazit v menu'
+  stereotype: Stereotyp
+  cf_show_custom_field_button: 'Zobrazit volitelná pole'
+  cf_custom_fields: 'Volitelná pole'
+  cf_name: 'Jméno'
+  cf_value: 'Hodnota'
+
+  cf_add_custom_field_input: 'Přidat pole'
+  cf_add_new_custom_field: 'Přidat nové pole'
+  cf_cancel: 'Storno'
+  cf_close: 'Zavřít'
+  cf_custom_fields: 'Volitelná pole'
+  cf_delete: 'Snazat'
+  cf_delete_confirm: 'Opravdu chcete smazat volitelné pole "{{name}}"?'
+  cf_enter_new: 'Zadat nové'
+  cf_name: 'Jméno'
+  cf_select: ' - vyberte - '
+  cf_select_existing: 'Vybrat existující'
+  cf_show_custom_field_button: 'Zobrazit volitelná pole'
+  cf_update: 'Aktualizovat'
+  cf_value: 'Hodnota'
+  custom_fields_controller:
+    flash_error:
+      create: 'Chyba při vytváření voliteného pole:'
+      update: 'Chyba při aktualizaci voliteného pole:'
+    flash_success:
+      create: 'Volitené pole bylo vytvořeno.'
+      destroy: 'Volitené pole bylo smazáno.'
+      update: 'Volitené pole bylo aktualizováno.'
+
+
+  page_attachments: Přílohy stránek
+  attachment: Příloha
+  attachments: Přílohy
+  drag_handle: Držák pro přesun
+  drag_to_change_order: Přetažením změníte pořadí
+  page_attachments_list_description:
+    Níže naleznete seznam příloh všech stránek na vašem webu.
+  list_view: Seznam všech
+  code: Kód
+  none: žádný
+  edit_page_attachment: Editace přílohy
+  save: Uložit
+  title: Titulek
+
+  settings_ext:
+    key: 'Název'
+    value: 'Hodnota'
+    new: 'Nové nastavení'
+    delete_warning: 'Tyto nastavení jsou důležitá pro funkčnost webu, jejich smazání může vést k neočekávaným chybám.'
+    i_understand: 'Ruzumín a opravdu chci nastavení smazat.'
+    description: 'Popis nastavení'
+    create: 'Vytvořit nastavení'
+    hidden_for_user: 'Skryto běžným uživatelům'
+    name: Název
+
+
+  activerecord:
+    errors:
+      models:
+        asset:
+          attributes:
+            asset:
+              blank: 'Musite vybrat soubor pro nahrání!'
+        order:
+          attributes:
+            name:
+              blank: 'musí být zadáno'
+
+  paperclipped:
+    add_asset_to_bucket: 'Přidat soubor do kyblíku'
+    add_to_bucket: 'Vložit do kyklíku'
+    asset: 'Přiíloha'
+    asset_edit_title: 'Editovat přílohu'
+    asset_errors: 'Promiňte. {{errors}}'
+    asset_page_attachment_note: 'Přiložené soubory. Mohou být vloženy do textu tažením myši nebo pomocí tagu <code>&lt;r:assets:each /&gt;</code>'
+    asset_note: 'Přiložené soubory. '
+    assets_explanation: 'Soubory a obrázky mohou být nahrány a poté přiloženy ke stránkám. Klikněte na jméno souboru pro editaci nebo klikněte na <code>Smazat</code> pro odstranění.'
+    assets_title: 'Přílohy'
+    asset_upload_note: 'Soubor zde nahraný bude automaticky přiložen k této stánce.'
+    asset_upload_note: 'Vyberte sobor pro nahrání. Pokud necháte pole <code>Název</code> prázdné, bude pooužito jméno souboru bez přípony. Po kliknutí na <code>Více</code> můžete také přidat popisek.'
+    attached_assets: 'Přiložené soubory'
+    attach_to_page: 'Přiložit ke stránce'
+    audio: 'Audio'
+    bucket: 'Kyblík'
+    bucket_note: 'Kyblík poskytuje dočasné uložiště pro vaše soubory. Můžete jej použít pro přenášení souborů mezi stránkami.'
+    caption: 'Popisek'
+    choose_upload: 'Vyberte soubor pro nahrání'
+    clear_bucket: 'Vysypat kyblík'
+    confirm_remove_asset: 'Opravdu chcete <strong class="warning">natrvalo smazat</strong> tyto soubory?'
+    confirm_remove_from_page: 'Opravdu chcete odebrat tento soubor ze stránky?'
+    delete_asset: 'Smazat soubor'
+    edit_asset: 'Editovat {{asset}}'
+    empty_bucket: 'Kyblík je prázdný'
+    filename: 'Název souboru'
+    images: 'Obrázky'
+    less: 'Méně'
+    movies: 'Videa'
+    new_asset: 'Nová příloha'
+    no_assets_found: 'Žádná příloha nenalezena'
+    no_assets: 'Žádné přílohy'
+    no_attached_assets: 'Žádné přiložené soubory.'
+    others: 'Ostatní'
+    regenerate_all_thumbnails: 'Zde můžete přegenerovat zmenšeniny všech obrázků, to může chvíli trvat.'
+    regenerate: 'Regenerate'
+    regenerate_thumbnails: 'Zde můžete přegenerovat zmenšeniny obrázků, to může chvíli trvat.'
+    remove_asset: 'Odebrat přílohu'
+    remove_from_page: 'Odebrat ze stránky'
+    reorder: 'Přeuspořádat'
+    replace_file: 'Nahradit soubor'
+    save_and_upload: 'Uložit a nahrát soubor'
+    search_assets: 'Hledat přílohy'
+    search: 'Hledat'
+    show_assets_bucket: 'Zobrazit kyblík s přílohami'
+    title: 'Název'
+    type: 'Typ'
+    types_to_find: 'Pouze typy'
+    upload: 'Nahrát'
+
+  activerecord:
+    models:
+      product_page: 'Produkt'
+    attributes:
+      product_page_fields:
+        price: 'Cena'
+      order_fields:
+        name: 'Jméno'
+        surname: 'Příjmení'
+        email: 'Email'
+        phone: 'Telefón'
+        company: 'Název firmy'
+        street: 'Ulice'
+        city: 'Město'
+        zip: 'PSČ'

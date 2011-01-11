@@ -1,0 +1,80 @@
+<h2>Osobní údaje</h2>
+
+
+<% form_for :order, :url => {:controller => 'checkout', :action => 'create'} do |f| %>
+  <table>
+    <tr>
+      <td colspan="2"><h3>Fakturační adresa</h3></td>
+    </tr>
+    <tr>
+      <th><%= f.label :name, 'Jméno' %> <span class="required">*</span></th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :surname, 'Přijmení' %> <span class="required">*</span></th>
+      <td><%= f.text_field :surname %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :company, 'Název firmy' %></th>
+      <td><%= f.text_field :company %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :email, 'Email' %> <span class="required">*</span></th>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :phone, 'Telefón' %> <span class="required">*</span></th>
+      <td><%= f.text_field :phone %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :street, 'Ulice' %> <span class="required">*</span></th>
+      <td><%= f.text_field :street %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :city, 'Město' %> <span class="required">*</span></th>
+      <td><%= f.text_field :city %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :zip, 'PSČ' %> <span class="required">*</span></th>
+      <td><%= f.text_field :zip %></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <h3 style="margin: 1em 0 0 0">Doručovací adresa</h3>
+        <p>Pokud se shoduje s fakturační adresou nechejte pole nevyplněné.</p>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :delivery_name, 'Jméno' %></th>
+      <td><%= f.text_field :delivery_name %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :delivery_surname, 'Přijmení' %></th>
+      <td><%= f.text_field :delivery_surname %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :delivery_street, 'Ulice' %></th>
+      <td><%= f.text_field :delivery_street %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :delivery_city, 'Město' %></th>
+      <td><%= f.text_field :delivery_city %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :delivery_zip, 'PSČ' %></th>
+      <td><%= f.text_field :delivery_zip %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :delivery_phone, 'Telefón' %></th>
+      <td><%= f.text_field :delivery_phone %></td>
+    </tr>
+
+  </table>
+
+  <p><%= f.submit 'Odeslat' %></p>
+
+  <p><span class="required">*</span> Tyto údaje jsou povinné.</p>
+<% end %>
+
+
+<%= render 'shared/root_parts' %>

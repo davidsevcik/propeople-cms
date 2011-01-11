@@ -1,0 +1,3 @@
+%p#published_at_select{:class => (@page.published? ? nil : 'hidden')}
+  = f.label :published_at, t('published_on')
+  = f.datetime_select :published_at

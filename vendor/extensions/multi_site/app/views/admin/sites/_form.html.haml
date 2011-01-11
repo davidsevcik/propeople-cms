@@ -1,0 +1,34 @@
+- form_for [:admin, @site] do |f|
+  = render_region :form_top
+
+  - render_region :form do |form|
+    - form.edit_name do
+      %p
+        = f.label :name, 'Název'
+        = f.text_field :name, :class => 'textbox'
+    - form.edit_match do
+      %p
+        %label{:for => "site_domain"} Doména - regulární výraz
+        = f.text_field :domain
+    - form.edit_base do
+      %p
+        %label{:for => "site_base_domain"} Doména - základ
+        = f.text_field :base_domain
+    - form.edit_language do
+      %p
+        %label{:for => "site_language"} Jazyk webu
+        = f.select :language, YAML::load(Radiant::Config['multilingual.languages'])['languages'].map {|lang| [lang[1], lang[0]] }
+    - form.edit_homepage do
+      %p
+        %label{:for => "site_homepage_id"} ID titulní stránky
+        = f.text_field :homepage_id
+        - if f.object.new_record?
+          (A new homepage will automatically be created if not specified.)
+
+  - render_region :form_bottom do |form_bottom|
+    - form_bottom.edit_buttons do
+      %p.buttons
+        = save_model_button(@site)
+        = save_model_and_continue_editing_button(@site)
+        or 
+        = link_to "Cancel", admin_sites_path

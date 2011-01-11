@@ -1,0 +1,45 @@
+- content_for 'page_css' do
+  :sass
+    table#articles_index
+      span.label
+        color: #666
+        font-size: 1.2em
+
+      div.nest-padding
+        width: 35px
+        height: 10px
+        float: left
+
+      tr.spacer
+        td
+          background: #EAEAEA
+          height: 3px
+          padding: 0
+    p.new
+      a
+        color: #000
+        border: 1px solid #ddf
+        padding: 6px
+        text-decoration: none
+        &:hover
+          background: #efefff
+.outset
+  - render_region :top
+  - render_region :main do |main|
+    - main.list do
+      %table#articles_index.index
+        %thead
+          %tr
+            %th.title Název
+            %th.date
+        %tbody
+          - @articles.each do |article|
+            %tr
+              %td= article.headline
+              %td= article.start
+
+#actions
+  - render_region :bottom do |bottom|
+    - bottom.new_button do
+      %ul
+        %li.new= link_to 'Nový článek', new_admin_news_entry_url

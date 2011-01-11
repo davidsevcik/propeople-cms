@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Objednávka č. <%= @order.id %></h1>
+
+    <h2>Zboží</h2>
+    <table id="basket">
+      <% sum_price = 0 %>
+      <% @order.items.each do |item| %>
+        <tr>
+          <th>Název produku</th>
+          <th align="right">Cena za kus</th>
+          <th align="right">Počet kusů</th>
+          <th align="right">Celková cena</th>
+        </tr>
+        <tr class="product-row">
+          <td>
+            <%= h item.product.title %>
+            <%= hidden_field_tag "items[#{item.id}][product_page_id]", item.product.id %>
+          </td>
+          <td align="right"><%= item.price %> Kč</td>
+          <td align="right"><%= text_field_tag "items[#{item.id}][quantity]", item.quantity, :size => 2 %></td>
+          <td align="right"><%= item.quantity * item.price %> Kč</td>
+          <td align="center"><%= link_to 'smazat', 'javascript:void(0)', :class => 'delete-link' %></td>
+        </tr>
+        <% sum_price += item.quantity * item.price %>
+      <% end %>
+      <td colspan="2" style="border:none"></td>
+      <th align="right">Výsledná cena</th>
+      <td align="right"><strong><%= sum_price %> Kč</strong></td>
+    </table>
+
+    <h2>Zákazník</h2>
+    <table>
+      <tr>
+        <td colspan="2"><h3>Fakturační adresa</h3></td>
+      </tr>
+      <tr>
+        <th>Jméno</th>
+        <td><%= @order.name %></td>
+      </tr>
+      <tr>
+        <th>Přijmení</th>
+        <td><%= @order.surname %></td>
+      </tr>
+      <tr>
+        <th>Název firmy</th>
+        <td><%= @order.company %></td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td><%= @order.email %></td>
+      </tr>
+      <tr>
+        <th>Telefón</th>
+        <td><%= @order.phone %></td>
+      </tr>
+      <tr>
+        <th>Ulice</th>
+        <td><%= @order.street %></td>
+      </tr>
+      <tr>
+        <th>Město</th>
+        <td><%= @order.city %></td>
+      </tr>
+      <tr>
+        <th>PSČ</th>
+        <td><%= @order.zip %></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <h3>Doručovací adresa</h3>
+        </td>
+      </tr>
+      <tr>
+        <th>Jméno</th>
+        <td><%= @order.delivery_name %></td>
+      </tr>
+      <tr>
+        <th>Přijmení</th>
+        <td><%= @order.delivery_surname %></td>
+      </tr>
+      <tr>
+        <th>Ulice</th>
+        <td><%= @order.delivery_street %></td>
+      </tr>
+      <tr>
+        <th>Město</th>
+        <td><%= @order.delivery_city %></td>
+      </tr>
+      <tr>
+        <th>PSČ</th>
+        <td><%= @order.delivery_zip %></td>
+      </tr>
+      <tr>
+        <th>Telefón</th>
+        <td><%= @order.delivery_phone %></td>
+      </tr>
+    </table>
+
+  </body>
+</html>

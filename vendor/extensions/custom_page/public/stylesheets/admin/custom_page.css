@@ -1,0 +1,40 @@
+#specific_fields {
+  clear: both;
+  color: #333;
+  background: #f5f1e2 url(/images/admin/vertical_tan_gradient.png) repeat-x top;
+  margin: 10px 0;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  overflow: hidden;
+}
+#specific_fields h3 {
+  font-size: 16px;
+  padding: 7px 0;
+}
+#specific_fields h3 {
+  background: #eae3c5;
+  margin: 0;
+  padding: 0.5em;
+}
+#specific_fields table {
+  margin: 1em;
+}
+#specific_fields table th {
+  width: 120px;
+  font-weight: bold;
+}
+#specific_fields table th, #specific_fields table td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+#new_page_form th, #new_page_form td { vertical-align: middle; padding: 2px 0; }
+#new_page_form th { padding-right: 5px; }
+#new_page_form #page_title { width: 100%; }
+
+#content form .buttons { font-size: 100%; }
+#content form .buttons a { color: #0066CC; }
+#content form .buttons a.delete { color: red; }
+
+#content form .buttons button, #content form .buttons input.button { font-size: 110%; }
