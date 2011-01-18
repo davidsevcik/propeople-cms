@@ -200,7 +200,40 @@
             },
             onOk: function(){
                 var w = this;
+                
+                var width = w.getValueOf('info', 'txtWidth');
+                var height = w.getValueOf('info', 'txtHeight');
+                
+                var srcParts;
+                if (srcParts = w.getValueOf('info', 'txtUrl').match(/^(.+)_w(\d+)h(\d+)(\.[a-zA-Z]+)$/)) {
+                    var filenameBase = srcParts[1], filenameExtension = srcParts[4];
+                } else if (srcParts = w.getValueOf('info', 'txtUrl').match(/^(.+)(\.[a-zA-Z]+)$/)) {
+                    var filenameBase = srcParts[1], filenameExtension = srcParts[2];
+                } else {
+                    alert('Chybná adresa souboru');
+                }
+                
+                if (filenameBase) {
+                    new Ajax.Request('/admin/page_attachments/resize', {
+                        asynchronous: false,
+                        parameters: {
+                            url: filenameBase + filenameExtension,
+                            page_id: $('edit_page').action.match(/\d+$/)[0],
+                            width: width,
+                            height: height
+                        },
+                        onSuccess: function(response) {
+                            if (response.responseText != 'original') {                              
+                                var src = filenameBase + '_w' + width + 'h' + height + filenameExtension;
+                                w.setValueOf('info', 'txtUrl', src);
+                            }
+                        }    
+                    }); 
+                }
+                
+                
                 if (w.imageEditMode) {
+                    
                     var v = w.imageEditMode;
                     if (r == 'image' && v == 'input' && confirm(q.lang.image.button2Img)) {
                         v = 'img';
@@ -295,24 +328,6 @@
                     style: 'height:40px',
                     size: 38
                 }, {
-					type: 'text',
-					id: 'radiant_page_id',
-					domId: 'radiant_page_id',
-					label: 'pokus',
-					hidden: true,
-					size: 50,
-					onLoad: function(v, w){
-					    //alert('z dialogu');
-					    console.log(v);
-					    
-					    //this.setAttribute('name', 'radiant_page_id');
-                        this.setValue($('edit_page').action.match(/\d+$/)[0]);
-                       
-                        
-                        //this.setInitValue();
-                    
-                    }
-			    }, {
                     type: 'fileButton',
                     id: 'uploadButton',
                     filebrowser: 'info:txtUrl',
@@ -447,11 +462,21 @@
                                     },
                                     setup: o,
                                     commit: function(v, w, x){
+                                        
                                         var y = this.getValue();
                                         if (v == a) {
-                                            if (y) 
+                                            if (y) {
                                                 w.setStyle('width', CKEDITOR.tools.cssLength(y));
-                                            else 
+                                                /*w.setAttribute('width', y);
+                                                
+                                                var srcParts = w.getAttribute('src').split('.');
+                                                var src = '';
+                                                for (var i = 0; i < (srcParts.length-1); i++) {
+                                                    src = src + srcParts[i];
+                                                }
+                                                src = src + '_w' + y; 
+                                                w.setAttribute('src', src);*/
+                                            } else 
                                                 if (!y && this.isChanged()) 
                                                     w.removeStyle('width');
                                             !x && w.removeAttribute('width');
@@ -491,11 +516,25 @@
                                     },
                                     setup: o,
                                     commit: function(v, w, x){
+                                        
                                         var y = this.getValue();
                                         if (v == a) {
-                                            if (y) 
+                                            if (y) {
+                                                //var width = w.getAttribute('width');
+                                                
                                                 w.setStyle('height', CKEDITOR.tools.cssLength(y));
-                                            else 
+                                                
+                                                /*var srcParts = w.getAttribute('src').split('.');
+                                                var src = '';
+                                                for (var i = 0; i < (srcParts.length-1); i++) {
+                                                    src = src + srcParts[i];
+                                                }
+                                                
+                                                src = src + '_w' + width + 'h' + y; 
+                                                w.setAttribute('src', src);
+                                                w.removeAttribute('width');*/
+                                                
+                                            } else 
                                                 if (!y && this.isChanged()) 
                                                     w.removeStyle('height');
                                             if (!x && v == a) 
