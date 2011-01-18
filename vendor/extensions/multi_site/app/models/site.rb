@@ -1,6 +1,7 @@
 class Site < ActiveRecord::Base
   acts_as_list
   default_scope :order => 'position ASC'
+ 
 
   class << self
     def find_for_host(hostname = '')
@@ -13,6 +14,7 @@ class Site < ActiveRecord::Base
   end
   
   belongs_to :homepage, :class_name => "Page", :foreign_key => "homepage_id"
+  has_many :pages, :dependent => :nullify
   validates_presence_of :name, :base_domain
   validates_uniqueness_of :domain
   

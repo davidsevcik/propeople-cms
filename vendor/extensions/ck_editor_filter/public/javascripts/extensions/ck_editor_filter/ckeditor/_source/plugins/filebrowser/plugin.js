@@ -216,6 +216,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 		var params = filebrowser.params || {};
 		params.CKEditor = editor.name;
 		params.CKEditorFuncNum = editor._.filebrowserFn;
+		params.page_id = $('edit_page').action.match(/\d+$/)[0];
 		if ( !params.langCode )
 			params.langCode = editor.langCode;
 

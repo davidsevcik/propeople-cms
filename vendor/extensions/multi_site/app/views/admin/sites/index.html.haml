@@ -28,7 +28,7 @@
               - row.base_td do
                 %td= h(site.base_domain)
               - row.language_td do
-                %td= h(YAML::load(Radiant::Config['multilingual.languages'])['languages'][site.language])
+                %td= h(YAML::load(Radiant::Config['multilingual.languages'])[site.language])
               - row.modify_td do
                 %td= link_to image("minus.png", :alt => "Remove") + " Smazat", admin_site_path(site), :method => :delete, :confirm => "Are you sure you want to permanently remove #{site.name}?"
               - row.order_td do

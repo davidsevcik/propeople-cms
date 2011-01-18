@@ -2,7 +2,9 @@ module CustomPageInterface
   def self.included(base)
     base.class_eval do
       before_filter :add_custom_page_creation_partials, :only => [:index]
-      before_filter :add_specific_fields, :only => [:edit]      
+      before_filter :add_specific_fields, :only => [:edit]   
+      before_filter :load_languages, :only => [:index]
+      
 
       include InstanceMethods
 
@@ -11,7 +13,7 @@ module CustomPageInterface
           self.model = model_class.new_with_defaults(config)
         else
           self.model = params[:page_type].constantize.new
-          self.model.parent_id = params[:page_id]
+          self.model.parent_id = params[:page_id] if params[:page_id]
         end
 
         if params[:page_id].blank?
@@ -29,14 +31,51 @@ module CustomPageInterface
         end
 
         self.model.breadcrumb = params[:page_title]
-        self.model.status = Status['draft']
-        self.model.class_name = params[:page_type]
+        self.model.status ||= Status['draft']
+        self.model.site = self.model.parent.site if self.model.parent
+        self.model.layout ||= Layout.find_by_name("page")
+        
+        if params[:multilingual]
+        	multilingual_group = MultilingualGroup.create
+        	self.model.multilingual_group = multilingual_group
+        	
+        	params[:multilingual].each_pair do |lang, flags|
+        		create_other_language_page(lang, self.model, multilingual_group, !flags[:notify].nil?) if flags[:create]			
+        	end
+        end
+        
         self.model.save!
 
         redirect_to edit_admin_page_path(self.model)
       end
+      
+      
+    	protected
+    	
+    	
+    	def create_other_language_page(lang, main_page, multilingual_group, notify=true)
+    		site = Site.find_by_language(lang.to_s)
+  			if main_page.parent && main_page.parent.multilingual_group_id
+  				lang_parent = Page.find_by_site_id_and_multilingual_group_id(site.id, main_page.parent.multilingual_group_id)
+  			end
+  			
+  			lang_parent ||= site.homepage
+  			
+			  page = main_page.class_name.constantize.new		
+  			page.site = site
+  			page.parent = lang_parent
+  			page.title = "[#{main_page.title}]"
+  			page.breadcrumb = page.title
+  			page.slug = "translate-#{main_page.slug}"
+  			page.status = notify ? Status[:for_translation_notify] : Status[:for_traslation]
+  			page.multilingual_group = multilingual_group
+  			page.save!
+  			
+  			MultilingualMailer.deliver_translator_notification(page, lang) if notify
+  		end 		
     end
   end
+
 
   module InstanceMethods
     def add_custom_page_creation_partials
@@ -58,5 +97,10 @@ module CustomPageInterface
         @field_columns = self.model.fields.class.columns_hash
       end
     end
+    
+    def load_languages
+      @sites = Site.all
+    	@languages = YAML::load(Radiant::Config['multilingual.languages'])
+   	end
   end
 end

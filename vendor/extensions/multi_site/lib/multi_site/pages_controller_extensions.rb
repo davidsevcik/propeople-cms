@@ -16,7 +16,7 @@ module MultiSite::PagesControllerExtensions
     if params[:root] || session[:root_page_id] # If a root page is specified
     	session[:root_page_id] = params[:root] if params[:root]
       @homepage = Page.find(session[:root_page_id])
-      @site = @homepage.root.site  
+      @site = @homepage.site  
     elsif @site = Site.first(:order => "position ASC") # If there is a site defined
       if @site.homepage
         @homepage = @site.homepage

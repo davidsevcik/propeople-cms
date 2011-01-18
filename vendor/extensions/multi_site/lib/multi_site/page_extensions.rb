@@ -3,7 +3,7 @@ module MultiSite::PageExtensions
     base.class_eval {
       alias_method_chain :url, :sites
       mattr_accessor :current_site
-      has_one :site, :foreign_key => "homepage_id", :dependent => :nullify
+      belongs_to :site
     }
     base.extend ClassMethods
     class << base
@@ -14,6 +14,7 @@ module MultiSite::PageExtensions
   module ClassMethods
     def find_by_url_with_sites(url, live=true)
       root = find_by_parent_id(nil)
+      debugger
       if self.current_site.is_a?(Site)
         root = self.current_site.homepage
       end
@@ -23,7 +24,7 @@ module MultiSite::PageExtensions
   end
   
   def url_with_sites
-    if parent
+    if parent?
       parent.child_url(self)
     else
       "/"

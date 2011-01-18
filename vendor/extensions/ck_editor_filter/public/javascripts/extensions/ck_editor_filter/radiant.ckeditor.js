@@ -19,6 +19,11 @@ function instantiateCkEditor(partIndex){
 	    ['Maximize','-','About']
 	];
 	
+	
+	CKEDITOR.config.filebrowserBrowseUrl = '/admin/attachments';
+	CKEDITOR.config.filebrowserUploadUrl = '/admin/page_attachments';
+	
+	
 	var usedFilter = $('part_' + partIndex +'_filter_id');
 	if(usedFilter.value == 'CKEditor'){
 		putInEditor(partIndex);

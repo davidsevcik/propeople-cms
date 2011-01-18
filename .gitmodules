@@ -1,0 +1,3 @@
+[submodule "vendor/extensions/back_door"]
+	path = vendor/extensions/back_door
+	url = git://github.com/aitorgr/radiant-backdoor.git

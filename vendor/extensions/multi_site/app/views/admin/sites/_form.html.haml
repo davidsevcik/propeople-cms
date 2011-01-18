@@ -17,7 +17,7 @@
     - form.edit_language do
       %p
         %label{:for => "site_language"} Jazyk webu
-        = f.select :language, YAML::load(Radiant::Config['multilingual.languages'])['languages'].map {|lang| [lang[1], lang[0]] }
+        = f.select :language, YAML::load(Radiant::Config['multilingual.languages']).map {|lang| [lang[1], lang[0]] }
     - form.edit_homepage do
       %p
         %label{:for => "site_homepage_id"} ID titulní stránky

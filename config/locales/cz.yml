@@ -45,7 +45,7 @@ cz:
   close: 'Zavřít'
   content: 'Obsah'
   content_type: 'Content-Type'
-  creating_status: 'Tvorba {{model}}&#8230;'
+  creating_status: 'Ukládám...'
   date:
     abbr_day_names: [Ne, Po, Út, St, Čt, Pá, So]
     abbr_month_names: [~, leden, únor, březen, duben, květen, červen, červenec, srpen, září, říjen, listopad, prosinec]
@@ -236,8 +236,11 @@ cz:
   code: Kód
   none: žádný
   edit_page_attachment: Editace přílohy
+
   save: Uložit
   title: Titulek
+  for_translation: Čeká na překlad
+  for_translation_notify: Čeká na překlad
 
   settings_ext:
     key: 'Název'

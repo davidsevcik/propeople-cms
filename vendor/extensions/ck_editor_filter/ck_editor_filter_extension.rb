@@ -6,11 +6,11 @@ class CkEditorFilterExtension < Radiant::Extension
   description "Describe your extension here"
   url "http://yourwebsite.com/ck_editor_filter"
   
-  # define_routes do |map|
-  #   map.namespace :admin, :member => { :remove => :get } do |admin|
-  #     admin.resources :ck_editor_filter
-  #   end
-  # end
+  define_routes do |map|
+    map.namespace :admin do |admin|
+      admin.resources :attachments
+    end
+  end
   
   def activate
     CkEditorFilter

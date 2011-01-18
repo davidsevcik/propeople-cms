@@ -29,9 +29,12 @@
   vertical-align: middle;
 }
 
+
 #new_page_form th, #new_page_form td { vertical-align: middle; padding: 2px 0; }
-#new_page_form th { padding-right: 5px; }
+#new_page_form th { padding-right: 5px; font-weight: bold; }
 #new_page_form #page_title { width: 100%; }
+#new_page_form { font-size: 13px; }
+#new_page_form .multilingual-key { padding-right: 10px; }
 
 #content form .buttons { font-size: 100%; }
 #content form .buttons a { color: #0066CC; }

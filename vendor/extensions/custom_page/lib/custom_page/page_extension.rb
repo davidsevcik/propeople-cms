@@ -1,7 +1,9 @@
 module CustomPage
   module PageExtension    
     def self.included(base)
-      base.class_eval do
+      base.class_eval do  
+      
+      	belongs_to :multilingual_group	
 
         def self.extended_page_type(options={})
           options.reverse_merge!(:for_editor => true)
@@ -40,6 +42,11 @@ module CustomPage
 
         def self.type_for_editor?
           @is_type_for_editor ||= false
+        end
+        
+        
+        def full_url
+        	self.site.url(self.url)
         end
       end
     end

@@ -12,7 +12,7 @@ require 'radius'
 Radiant::Initializer.run do |config|
   # Skip frameworks you're not going to use (only works if using vendor/rails).
   # To use Rails without a database, you must remove the Active Record framework
-  config.frameworks -= [ :action_mailer ]
+  #config.frameworks -= [ :action_mailer ]
 
   # Only load the extensions named here, in the order given. By default all
   # extensions in vendor/extensions are loaded, in alphabetical order. :all
@@ -24,9 +24,9 @@ Radiant::Initializer.run do |config|
 #  config.extensions -= [:dutch_language_pack, :french_language_pack, :german_language_pack,
 #                        :italian_language_pack, :japanese_language_pack, :russian_language_pack]
 
-  config.extensions = [:settings, :multi_site, :multilingual, :archive, :sns, :edit_area, :layouts,
+  config.extensions = [:settings, :mailer, :multi_site, :sns, :edit_area, :layouts,
                       :reorder, :navigation_tags, :ck_editor_filter, :truncate, :custom_page,
-                      :conditional_tags, :site, :sns_file_system, :file_system]
+                      :conditional_tags, :site, :back_door, :page_attachments]
 
 
   # Your secret key for verifying cookie session data integrity.
@@ -80,6 +80,7 @@ Radiant::Initializer.run do |config|
   end
 
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
+  config.gem 'paperclip', :version => '~> 2.3.3'
 
   config.after_initialize do
     # Add new inflection rules using the following format:

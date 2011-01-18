@@ -11,7 +11,7 @@ class NewsPage < Page
     self.layout = Layout.find_by_name('news_entry')
     self.show_in_menu = false
     self.save!
-    parts.create(:name => 'text', :content => '', :filter_id => 'Fckeditor')
+    parts.create(:name => 'text', :content => '', :filter_id => 'CKEditor')
     parts.create(:name => 'shrnuti', :content => '')
   end
 end

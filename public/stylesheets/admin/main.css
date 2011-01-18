@@ -600,7 +600,9 @@ body.edit_user #avatar, body.edit_personal_preferences #avatar {
       border-bottom: 1px solid #f0f0f0; }
       #content table.index td.status {
         color: #9eb3bf; }
-        #content table.index td.status.draft_status {
+        #content table.index td.status.draft_status, 
+        #content table.index td.status.for_translation_status,
+        #content table.index td.status.for_translation_notify_status {
           color: #c00; }
         #content table.index td.status.published_status {
           color: black; }
