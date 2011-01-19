@@ -1,4 +1,4 @@
-/*
+﻿/*
  Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
  For licensing, see LICENSE.html or http://ckeditor.com/license
  */
@@ -200,7 +200,40 @@
             },
             onOk: function(){
                 var w = this;
+                
+                var width = w.getValueOf('info', 'txtWidth');
+                var height = w.getValueOf('info', 'txtHeight');
+                
+                var srcParts;
+                if (srcParts = w.getValueOf('info', 'txtUrl').match(/^(.+)_w(\d+)h(\d+)(\.[a-zA-Z]+)$/)) {
+                    var filenameBase = srcParts[1], filenameExtension = srcParts[4];
+                } else if (srcParts = w.getValueOf('info', 'txtUrl').match(/^(.+)(\.[a-zA-Z]+)$/)) {
+                    var filenameBase = srcParts[1], filenameExtension = srcParts[2];
+                } else {
+                    alert('Chybná adresa souboru');
+                }
+                
+                if (filenameBase) {
+                    new Ajax.Request('/admin/page_attachments/resize', {
+                        asynchronous: false,
+                        parameters: {
+                            url: filenameBase + filenameExtension,
+                            page_id: $('edit_page').action.match(/\d+$/)[0],
+                            width: width,
+                            height: height
+                        },
+                        onSuccess: function(response) {
+                            if (response.responseText != 'original') {                              
+                                var src = filenameBase + '_w' + width + 'h' + height + filenameExtension;
+                                w.setValueOf('info', 'txtUrl', src);
+                            }
+                        }    
+                    }); 
+                }
+                
+                
                 if (w.imageEditMode) {
+                    
                     var v = w.imageEditMode;
                     if (r == 'image' && v == 'input' && confirm(q.lang.image.button2Img)) {
                         v = 'img';
@@ -429,11 +462,12 @@
                                     },
                                     setup: o,
                                     commit: function(v, w, x){
+                                        
                                         var y = this.getValue();
                                         if (v == a) {
-                                            if (y) 
+                                            if (y) {
                                                 w.setStyle('width', CKEDITOR.tools.cssLength(y));
-                                            else 
+                                            } else 
                                                 if (!y && this.isChanged()) 
                                                     w.removeStyle('width');
                                             !x && w.removeAttribute('width');
@@ -473,11 +507,12 @@
                                     },
                                     setup: o,
                                     commit: function(v, w, x){
+                                        
                                         var y = this.getValue();
                                         if (v == a) {
-                                            if (y) 
+                                            if (y) {
                                                 w.setStyle('height', CKEDITOR.tools.cssLength(y));
-                                            else 
+                                            } else 
                                                 if (!y && this.isChanged()) 
                                                     w.removeStyle('height');
                                             if (!x && v == a) 
@@ -942,4 +977,3 @@
         return p(q, 'imagebutton');
     });
 })();
-

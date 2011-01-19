@@ -467,15 +467,6 @@
                                         if (v == a) {
                                             if (y) {
                                                 w.setStyle('width', CKEDITOR.tools.cssLength(y));
-                                                /*w.setAttribute('width', y);
-                                                
-                                                var srcParts = w.getAttribute('src').split('.');
-                                                var src = '';
-                                                for (var i = 0; i < (srcParts.length-1); i++) {
-                                                    src = src + srcParts[i];
-                                                }
-                                                src = src + '_w' + y; 
-                                                w.setAttribute('src', src);*/
                                             } else 
                                                 if (!y && this.isChanged()) 
                                                     w.removeStyle('width');
@@ -520,20 +511,7 @@
                                         var y = this.getValue();
                                         if (v == a) {
                                             if (y) {
-                                                //var width = w.getAttribute('width');
-                                                
                                                 w.setStyle('height', CKEDITOR.tools.cssLength(y));
-                                                
-                                                /*var srcParts = w.getAttribute('src').split('.');
-                                                var src = '';
-                                                for (var i = 0; i < (srcParts.length-1); i++) {
-                                                    src = src + srcParts[i];
-                                                }
-                                                
-                                                src = src + '_w' + width + 'h' + y; 
-                                                w.setAttribute('src', src);
-                                                w.removeAttribute('width');*/
-                                                
                                             } else 
                                                 if (!y && this.isChanged()) 
                                                     w.removeStyle('height');

@@ -158,7 +158,7 @@ cz:
     layouts:
       remove_warning: 'Opravdu chcete <strong class="warning">smazat</strong> tuto šablonu?'
     pages:
-      remove_warning: 'Opravdu chcete <strong class="warning">smazat</strong> tyto {{pages}}?'
+      remove_warning: 'Opravdu chcete <strong class="warning">smazat</strong> tyto stránky?'
     snippets:
       remove_warning: 'Opravdu chcete <strong class="warning">smazat</strong> tento snippet?'
     users:
