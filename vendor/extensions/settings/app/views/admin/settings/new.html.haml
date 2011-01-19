@@ -1,0 +1,51 @@
+- body_classes << 'reversed'
+- content_for 'page_css' do
+  :sass
+    h2.setting-name
+      color: #C00
+      font-size: 200%
+      font-family: Georgia,Palatino,"Times New Roman",Times,serif
+      font-weight: normal
+      margin: 25px 0 0
+    
+    div.description
+      margin: 5px 20px
+      color: #444
+      
+    p.title
+      margin: 10px 0 !important
+    
+    textarea.textarea
+      height: 150px !important
+      width: 100%
+      display: block
+
+%h1
+  New Radiant Setting
+
+- form_for :setting, :url => admin_settings_path do |f|
+  .form-area
+    %p
+      %label
+        = t 'settings_ext.name'
+        %br
+        = f.text_field :key, :class => 'textbox', :style => "width:100%"
+    %p
+      %label
+        = t 'settings_ext.value'
+        %br
+        = f.text_area :value, :class => 'textarea'
+    %p
+      %label
+        = t 'settings_ext.description'
+        %br
+        = f.text_area :description, :class => 'textarea'
+    %p
+      = f.check_box :is_hidden_for_user
+      = t 'settings_ext.hidden_for_user'
+        
+    %p.buttons
+      = save_model_button(@setting, :label => t('settings_ext.create'))
+      = save_model_and_continue_editing_button(@setting)
+      or
+      = link_to t(:cancel), admin_settings_url

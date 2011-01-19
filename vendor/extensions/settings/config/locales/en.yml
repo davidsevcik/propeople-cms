@@ -1,0 +1,12 @@
+---
+en:
+  settings_ext:
+    key: Setting key
+    value: Value
+    new: New setting
+    description: Setting description
+    delete_warning: This system relies on some of these settings to work properly. Deleting settings may cause unexpected errors.
+    i_understand: I understand. Delete this setting entirely.
+    create: Create setting
+    hidden_for_user: Hidden for normal users
+    name: Name
