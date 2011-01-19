@@ -1,5 +1,5 @@
 # Uncomment this if you reference any of your controllers in activate
-# require_dependency 'application_controller'
+#require_dependency 'admin/text_assets_controller'
 
 class EditAreaExtension < Radiant::Extension
   version "1.0"
