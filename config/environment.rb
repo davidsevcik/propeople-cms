@@ -80,7 +80,6 @@ Radiant::Initializer.run do |config|
   end
 
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
-  config.gem 'paperclip', :version => '~> 2.3.3'
 
   config.after_initialize do
     # Add new inflection rules using the following format:
