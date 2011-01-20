@@ -27,3 +27,18 @@ class CustomPageExtension < Radiant::Extension
     admin.page.edit.add :layout_row, "show_in_menu"
   end
 end
+
+
+String.class_eval do
+  def fancy
+    str = self
+    str = str.gsub(":"," ")
+    str = str.gsub("-"," ")
+    str = str.gsub(/[ ]+/," ") # replace "multi" space to one
+    str = str.gsub(/ /,"-")    # replace each space to -
+    str = str.downcase
+    str = str.mb_chars.normalize(:kd).gsub(/[^\-x00-\x7F.]/n, '').to_s
+    return str
+  end
+end
+
