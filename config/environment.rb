@@ -25,7 +25,7 @@ Radiant::Initializer.run do |config|
 #                        :italian_language_pack, :japanese_language_pack, :russian_language_pack]
 
   config.extensions = [:settings, :multi_site, :mailer, :sns, :edit_area, :layouts,
-                      :reorder, :navigation_tags, :ck_editor_filter, :truncate, :custom_page,
+                      :drag_order, :navigation_tags, :ck_editor_filter, :truncate, :custom_page,
                       :conditional_tags, :page_attachments, :site]
 
 
