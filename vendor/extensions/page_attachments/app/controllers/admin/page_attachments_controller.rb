@@ -23,6 +23,13 @@ class Admin::PageAttachmentsController < ApplicationController
   end
   
   
+  def ckeditor_browser
+    @attachments = PageAttachment.find_all_by_page_id_and_parent_id(params[:page_id], nil)
+    
+    render :partial => 'ckeditor_browser', :layout => false
+  end
+  
+  
   def resize
   	if params[:url] =~ /[^\/]+$/ && params[:page_id] && params[:width] && params[:height]
   		if attachment = PageAttachment.find_by_page_id_and_filename(params[:page_id], $&)
@@ -48,6 +55,10 @@ class Admin::PageAttachmentsController < ApplicationController
   
   def edit
     @page_attachment = PageAttachment.find(params[:id])
+    if request.xhr?
+      @flags = PageAttachment.flags
+      render :partial => 'ajax_edit', :layout => false 
+    end
   end
   
   

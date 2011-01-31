@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer  "lock_version",                 :default => 0
   end
 
-  create_table "multilingual_group", :force => true do |t|
+  create_table "multilingual_groups", :force => true do |t|
   end
 
   create_table "news_categories", :force => true do |t|
@@ -127,16 +127,36 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.string   "title"
     t.string   "description"
     t.integer  "position"
+    t.string   "flag"
   end
+
+  create_table "page_fields", :force => true do |t|
+    t.integer "page_id"
+    t.string  "name"
+    t.text    "content"
+    t.string  "caption"
+    t.boolean "erasable", :default => true, :null => false
+  end
+
+  add_index "page_fields", ["page_id"], :name => "index_page_fields_on_page_id"
 
   create_table "page_parts", :force => true do |t|
-    t.string  "name",      :limit => 100
-    t.string  "filter_id", :limit => 25
-    t.text    "content"
-    t.integer "page_id"
+    t.string   "name",             :limit => 100
+    t.string   "filter_id",        :limit => 25
+    t.text     "content"
+    t.integer  "page_id"
+    t.string   "page_part_type"
+    t.string   "string_content"
+    t.boolean  "boolean_content"
+    t.integer  "integer_content"
+    t.datetime "datetime_content"
   end
 
+  add_index "page_parts", ["boolean_content"], :name => "index_page_parts_on_boolean_content"
+  add_index "page_parts", ["datetime_content"], :name => "index_page_parts_on_datetime_content"
+  add_index "page_parts", ["integer_content"], :name => "index_page_parts_on_integer_content"
   add_index "page_parts", ["page_id", "name"], :name => "parts_by_page"
+  add_index "page_parts", ["string_content"], :name => "index_page_parts_on_string_content"
 
   create_table "pages", :force => true do |t|
     t.string   "title"
@@ -153,12 +173,10 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer  "updated_by_id"
     t.boolean  "virtual",                              :default => false, :null => false
     t.integer  "lock_version",                         :default => 0
-    t.string   "description"
-    t.string   "keywords"
     t.boolean  "show_in_menu",                         :default => true
-    t.integer  "position"
     t.integer  "site_id"
     t.integer  "multilingual_group_id"
+    t.integer  "position",                             :default => 0
   end
 
   add_index "pages", ["class_name"], :name => "pages_class_name"

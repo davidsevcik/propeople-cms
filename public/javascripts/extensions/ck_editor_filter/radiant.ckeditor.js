@@ -20,7 +20,9 @@ function instantiateCkEditor(partIndex){
 	];
 	
 	
-	CKEDITOR.config.filebrowserBrowseUrl = '/admin/attachments';
+	CKEDITOR.config.filebrowserBrowseUrl = '/admin/page_attachments/ckeditor_browser';
+	CKEDITOR.config.filebrowserWindowWidth = '800';
+  CKEDITOR.config.filebrowserWindowHeight = '600';
 	CKEDITOR.config.filebrowserUploadUrl = '/admin/page_attachments';
 	
 	

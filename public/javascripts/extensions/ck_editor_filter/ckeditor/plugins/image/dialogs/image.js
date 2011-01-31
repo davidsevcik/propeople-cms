@@ -403,7 +403,11 @@
                             align: 'center',
                             label: q.lang.common.browseServer,
                             hidden: true,
-                            filebrowser: 'info:txtUrl'
+                            filebrowser: {
+                          		action: 'Browse',
+                          		target: 'info:txtUrl',
+                          		params: {page_id: $('edit_page').action.match(/\d+$/)[0]}
+                          	} 
                         }]
                     }]
                 }, {

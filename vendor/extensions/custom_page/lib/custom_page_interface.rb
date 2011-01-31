@@ -89,13 +89,13 @@ module CustomPageInterface
       include_javascript 'admin/custom_page'
       include_stylesheet 'admin/custom_page'
 
-      if self.model.respond_to?(:fields)
-        @buttons_partials ||= []
-        @buttons_partials << "specific_fields_box"   
+      #if self.model.respond_to?(:fields)
+      #  @buttons_partials ||= []
+      #  @buttons_partials << "specific_fields_box"  
 
-        @fields = self.model.fields
-        @field_columns = self.model.fields.class.columns_hash
-      end
+      #  @fields = self.model.fields
+      #  @field_columns = self.model.fields.class.columns_hash
+      #end
     end
     
     def load_languages

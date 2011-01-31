@@ -10,3 +10,6 @@
   - unless attachment.title.blank?
     %p= h attachment.short_title
   = link_to attachment.short_filename, attachment.public_filename
+  - unless attachment.flag.blank? 
+    = h '[' + attachment.flag + ']'
+      

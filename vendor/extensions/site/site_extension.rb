@@ -79,6 +79,12 @@ class SiteExtension < Radiant::Extension
 				
     	end
     end
+    
+    PagePart.class_eval do 
+      def after_initialize
+        
+      end
+    end
 
 #    Admin::PagesController.class_eval do
 #      before_filter :add_custom_admin_assets, :only => [:edit, :new]

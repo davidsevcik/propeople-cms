@@ -11,12 +11,17 @@
 #attachments .toolbar {
   float: right;
   padding: 6px 6px 0;
-  width: 50px;
   text-align: right;
+  width: 150px;
 }
-#attachments .toolbar img {
-  padding: 5px;
-  cursor: pointer;
+#attachments a.add-link img {
+  padding: 1px 2px;
+  vertical-align: top;
+}
+#attachments a.add-link { 
+  display: block; 
+  text-decoration: none; 
+  padding: 15px 19px;
 }
 #attachments h3 {
   font-size: 16px;
@@ -73,7 +78,6 @@
   padding: 8px 0;
 }
 #attachments ol li:last-child {
-  border-bottom: none;
 }
 #attachments .attachment .thumbnail img {
   background: white;
@@ -131,3 +135,15 @@
 li.clearfix {
   display: list-item;
 }
+
+#attachment_list { clear: both; }
+
+body#browser { 
+  background-color: #9E9E9E; 
+  font-family: 'Lucida Grande', 'Bitstream Vera Sans', Helvetica, Verdana, Arial, sans-serif;
+  font-size: 12px;
+}
+body#browser a {
+  color: #06C;
+}
+

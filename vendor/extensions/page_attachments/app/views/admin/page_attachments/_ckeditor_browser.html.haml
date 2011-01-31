@@ -1,0 +1,25 @@
+%doctype
+%html
+  %head
+    %title Přílohy
+    = stylesheet_link_tag 'admin/page_attachments'
+    = javascript_include_tag 'admin/prototype', 'admin/ckeditor_browser'
+  %body#browser
+    #attachments
+      %h3
+        Přílohy (
+        %span#attachment_count>= @attachments.count
+        )
+      - unless @attachments.count.zero?
+        %ol#attachment_list
+          - @attachments.each do |attachment|
+            %li{:id => "attachment_#{attachment.id}", :class =>"attachment clearfix"}
+              - unless attachment.thumbnails.empty?
+                = link_to image_tag(attachment.public_filename("icon")),  attachment.public_filename, :class => 'thumbnail'
+              - unless attachment.title.blank?
+                %p= h attachment.short_title
+              = link_to attachment.short_filename, attachment.public_filename
+              - unless attachment.flag.blank? 
+                = h '[' + attachment.flag + ']'
+        %div{:style => "clear:both;"}
+    

@@ -1,12 +1,42 @@
 #attachments
   .toolbar
-    = image_tag('admin/plus.png', :alt => 'add')
     = hidden_field_tag('attachment_index', @page.attachments.size, :id => 'attachment_index_field')
   %h3
-    Attachments (
+    Přílohy (
     %span#attachment_count>= @page.attachments.count
     )
   - unless @page.attachments.count.zero?
     %ol#attachment_list
       = render :partial => 'attachment', :collection => @page.attachments
     %div{:style => "clear:both;"}
+      %a.add-link{:href => 'javascript:void(0)'}
+        = image_tag('admin/plus.png', :alt => 'add')
+        %strong Přidat
+  %div{:style => 'display:none;'}
+    %div#attachment_upload_blueprint.attachment_upload
+      %p.title Nahrát soubor
+      %table
+        %tr
+          %th
+            %label Titulek
+          %td
+            %input{:size => '60', :name => 'page[attachments_attributes][][title]'}
+        %tr
+          %th
+            %label Popisek
+          %td
+            %input{:size => '60', :name => 'page[attachments_attributes][][description]'}
+        %tr
+          %th
+            %label Příznak
+          %td
+            - flag_options = options_for_select([['žádný', '']] + PageAttachment.flags.map {|flag| [flag, flag]} + [['nový příznak', 'new_flag']])
+            = select_tag "page[attachments_attributes][][flag]", flag_options, :class => 'flag_select'
+            %input{:name => 'new_flag', :style => 'display:none;'}
+        %tr
+          %th
+            %label Soubor
+          %td
+            %input{:type => 'file', :name => 'page[attachments_attributes][][uploaded_data]'}
+            %img{:src => '/images/admin/minus.png', :alt => 'storno'}
+    

@@ -1,0 +1,6 @@
+#attributes { margin-bottom: 20px; }
+#tab_control { margin-bottom: 0; }
+#attributes table.fieldset { margin-top: 20px; }
+div.drawer { height: 10px; }
+div.drawer_handle { display: none; }
+.drawer_contents table.fieldset th.label { width: 100px; }
