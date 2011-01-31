@@ -12,7 +12,6 @@ document.observe("dom:loaded", function() {
   
   $$('#attachment_list a').each(function(link) {
     link.observe('click', function(event) {
-      alert('click');
       var funcNum = getUrlParam('CKEditorFuncNum');
       window.opener.CKEDITOR.tools.callFunction(funcNum, link.href);
       window.close();
