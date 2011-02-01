@@ -6,6 +6,7 @@
   border-radius: 8px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
+  overflow: hidden;
 }
 #attachments .toolbar {
   float: right;
