@@ -81,17 +81,24 @@ class SiteExtension < Radiant::Extension
     end
     
     PagePart.class_eval do 
+      default_scope :order => 'position'
+    
       def after_initialize
-        
+        #nothing
       end
     end
+    
+    
+    
+    
+    admin.pages.edit.add :part_controls, 'admin/page_parts/additional_part_controls'
 
-#    Admin::PagesController.class_eval do
-#      before_filter :add_custom_admin_assets, :only => [:edit, :new]
-#
-#      def add_custom_admin_assets
-#        include_stylesheet 'admin/custom_admin'
-#      end
-#    end
+    Admin::PagesController.class_eval do
+      before_filter :add_custom_admin_assets, :only => [:edit, :new]
+
+      def add_custom_admin_assets
+        include_stylesheet 'admin/custom_admin'
+      end
+    end
   end
 end

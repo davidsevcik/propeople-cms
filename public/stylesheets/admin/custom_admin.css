@@ -1,3 +1,6 @@
-#page_text { padding: 0; }
+/*#page_text { padding: 0; }
 #page_text .part { margin: 12px 20px 20px; }
-#page_text #part_text.part { margin: 0; }
+#page_text #part_text.part { margin: 0; }*/
+
+
+span.part-title { padding: 0 15px; }

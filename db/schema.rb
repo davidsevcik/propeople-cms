@@ -150,6 +150,8 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.boolean  "boolean_content"
     t.integer  "integer_content"
     t.datetime "datetime_content"
+    t.string   "title"
+    t.integer  "position"
   end
 
   add_index "page_parts", ["boolean_content"], :name => "index_page_parts_on_boolean_content"

@@ -19,14 +19,24 @@ var TabControl = Class.create({
   
   updateTabs: function() {
     this.element.select('.page').each(function(page) {
-      if (!this.findTabByPage(page)) this.addTab(page);
+      if (!this.findTabByPage(page)) this.addTab(page, false);
     }.bind(this));
+    
+    this.tabs = this.tabs.sortBy(function(tab) {
+      return tab.position;
+    });
+    var tabContainer = this.tabContainer;
+    this.tabs.each(function(tab) {
+      tabContainer.insert({bottom: tab});
+    });
   },
   
-  addTab: function(page) {
+  addTab: function(page, insertToContainer) {
     var tab = new TabControl.Tab(page);
     this.tabs.push(tab);
-    this.tabContainer.insert({bottom: tab});
+    if (insertToContainer == null || insertToContainer) { 
+      this.tabContainer.insert({bottom: tab});
+    } 
     $('page_part_index_field').setValue(this.tabs.length);
     page.hide();
   },
@@ -95,6 +105,7 @@ TabControl.Tab = Class.create({
   initialize: function(page) {
     this.page = page;
     this.caption = page.readAttribute('data-caption');
+    this.position = parseInt(page.select('.part-position input')[0].value);
   },
   
   select: function() {

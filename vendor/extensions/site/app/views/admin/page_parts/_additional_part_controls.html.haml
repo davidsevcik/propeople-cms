@@ -1,0 +1,7 @@
+%span.additional-part-controls
+  %span.part-title
+    %label{:for => "part_#{page_part.id}_title"} Titulek oddílu
+    %input{:name => "page[parts_attributes][#{page_part_counter}][title]", :id => "part_#{page_part.id}_title", :value => page_part.title, :size => '40'}
+  %span.part-position
+    %label{:for => "part_#{page_part.id}_position"} Pozice
+    %input{:name => "page[parts_attributes][#{page_part_counter}][position]", :id => "part_#{page_part.id}_position", :value => page_part.position, :size => '2'}
