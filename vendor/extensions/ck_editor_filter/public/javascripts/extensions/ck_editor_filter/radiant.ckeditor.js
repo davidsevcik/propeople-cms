@@ -24,6 +24,7 @@ function instantiateCkEditor(partIndex){
 	CKEDITOR.config.filebrowserWindowWidth = '800';
   CKEDITOR.config.filebrowserWindowHeight = '600';
 	CKEDITOR.config.filebrowserUploadUrl = '/admin/page_attachments';
+	CKEDITOR.config.entities = false;
 	
 	
 	var usedFilter = $('part_' + partIndex +'_filter_id');

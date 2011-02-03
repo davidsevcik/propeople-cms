@@ -7,7 +7,7 @@
     <h1>Objednávka č. <%= @order.id %></h1>
 
     <h2>Zboží</h2>
-    <table id="basket">
+    <table>
       <% sum_price = 0 %>
       <% @order.items.each do |item| %>
         <tr>
@@ -17,14 +17,10 @@
           <th align="right">Celková cena</th>
         </tr>
         <tr class="product-row">
-          <td>
-            <%= h item.product.title %>
-            <%= hidden_field_tag "items[#{item.id}][product_page_id]", item.product.id %>
-          </td>
+          <td><%= h item.product.title %></td>
           <td align="right"><%= item.price %> Kč</td>
-          <td align="right"><%= text_field_tag "items[#{item.id}][quantity]", item.quantity, :size => 2 %></td>
+          <td align="right"><%= item.quantity %></td>
           <td align="right"><%= item.quantity * item.price %> Kč</td>
-          <td align="center"><%= link_to 'smazat', 'javascript:void(0)', :class => 'delete-link' %></td>
         </tr>
         <% sum_price += item.quantity * item.price %>
       <% end %>
@@ -34,10 +30,8 @@
     </table>
 
     <h2>Zákazník</h2>
-    <table>
-      <tr>
-        <td colspan="2"><h3>Fakturační adresa</h3></td>
-      </tr>
+    <h3>Fakturační adresa</h3>
+    <table style="text-align:left">
       <tr>
         <th>Jméno</th>
         <td><%= @order.name %></td>
@@ -70,11 +64,10 @@
         <th>PSČ</th>
         <td><%= @order.zip %></td>
       </tr>
-      <tr>
-        <td colspan="2">
-          <h3>Doručovací adresa</h3>
-        </td>
-      </tr>
+    </table>  
+    
+    <h3>Doručovací adresa</h3>
+    <table style="text-align:left">
       <tr>
         <th>Jméno</th>
         <td><%= @order.delivery_name %></td>

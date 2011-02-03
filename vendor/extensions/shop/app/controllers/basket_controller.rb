@@ -1,7 +1,6 @@
 class BasketController < SiteController
-  radiant_layout 'page'
+  radiant_layout 'basket'
   no_login_required
-
 
 
   def show

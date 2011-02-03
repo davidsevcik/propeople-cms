@@ -1,7 +1,7 @@
 # Uncomment this if you reference any of your controllers in activate
 # require_dependency 'application'
 
-class ArticlesExtension < Radiant::Extension
+class NewsExtension < Radiant::Extension
   version "1.0"
   description "Extension for news administration in backend and different frontend views"
   url "http://www.screenconcept.ch"
@@ -20,7 +20,6 @@ class ArticlesExtension < Radiant::Extension
   end
   
   def deactivate
-    admin.tabs.remove "News"
   end
   
 end
