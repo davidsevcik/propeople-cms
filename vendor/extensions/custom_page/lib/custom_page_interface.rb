@@ -69,10 +69,10 @@ module CustomPageInterface
           self.model = model_class.new_with_defaults(config)
         else
           self.model = params[:page_type].constantize.new
-          self.model.parent_id = params[:page_id] if params[:page_id]
+          self.model.parent_id = params[:parent_id] if params[:parent_id]
         end
 
-        if params[:page_id].blank?
+        if params[:parent_id].blank?
           self.model.slug = '/'
         end
 
