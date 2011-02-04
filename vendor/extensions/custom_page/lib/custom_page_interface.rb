@@ -6,48 +6,7 @@ module CustomPageInterface
       before_filter :load_languages, :only => [:index]
       
 
-      include InstanceMethods
-
-      def new_with_page_type
-        if params[:page_type].blank?
-          self.model = model_class.new_with_defaults(config)
-        else
-          self.model = params[:page_type].constantize.new
-          self.model.parent_id = params[:page_id] if params[:page_id]
-        end
-
-        if params[:page_id].blank?
-          self.model.slug = '/'
-        end
-
-        self.model.title = params[:page_title]
-        slug = params[:page_title].fancy
-        self.model.slug = slug
-
-        i = 0
-        while self.model.siblings.any? {|sibling| sibling.slug == self.model.slug }
-          i += 1
-          self.model.slug = slug + "-#{i}"
-        end
-
-        self.model.breadcrumb = params[:page_title]
-        self.model.status ||= Status['draft']
-        self.model.site = self.model.parent.site if self.model.parent
-        self.model.layout ||= Layout.find_by_name("page")
-        
-        if params[:multilingual]
-        	multilingual_group = MultilingualGroup.create
-        	self.model.multilingual_group = multilingual_group
-        	
-        	params[:multilingual].each_pair do |lang, flags|
-        		create_other_language_page(lang, self.model, multilingual_group, !flags[:notify].nil?) if flags[:create]			
-        	end
-        end
-        
-        self.model.save!
-
-        redirect_to edit_admin_page_path(self.model)
-      end
+      include InstanceMethods     
       
       alias_method_chain :new, :page_type
       
@@ -104,5 +63,46 @@ module CustomPageInterface
       @sites = Site.all
     	@languages = YAML::load(Radiant::Config['multilingual.languages'])
    	end
+   	
+   	def new_with_page_type
+        if params[:page_type].blank?
+          self.model = model_class.new_with_defaults(config)
+        else
+          self.model = params[:page_type].constantize.new
+          self.model.parent_id = params[:page_id] if params[:page_id]
+        end
+
+        if params[:page_id].blank?
+          self.model.slug = '/'
+        end
+
+        self.model.title = params[:page_title]
+        slug = params[:page_title].fancy
+        self.model.slug = slug
+
+        i = 0
+        while self.model.siblings.any? {|sibling| sibling.slug == self.model.slug }
+          i += 1
+          self.model.slug = slug + "-#{i}"
+        end
+
+        self.model.breadcrumb = params[:page_title]
+        self.model.status ||= Status['draft']
+        self.model.site = self.model.parent.site if self.model.parent
+        self.model.layout ||= Layout.find_by_name("page")
+        
+        if params[:multilingual]
+        	multilingual_group = MultilingualGroup.create
+        	self.model.multilingual_group = multilingual_group
+        	
+        	params[:multilingual].each_pair do |lang, flags|
+        		create_other_language_page(lang, self.model, multilingual_group, !flags[:notify].nil?) if flags[:create]			
+        	end
+        end
+        
+        self.model.save!
+
+        redirect_to edit_admin_page_path(self.model)
+      end
   end
 end
