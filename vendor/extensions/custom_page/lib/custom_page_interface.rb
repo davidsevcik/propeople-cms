@@ -65,44 +65,44 @@ module CustomPageInterface
    	end
    	
    	def precreate
-        if params[:page_type].blank?
-          self.model = model_class.new_with_defaults(config)
-        else
-          self.model = params[:page_type].constantize.new
-          self.model.parent_id = params[:parent_id] if params[:parent_id]
-        end
-
-        if params[:parent_id].blank?
-          self.model.slug = '/'
-        end
-
-        self.model.title = params[:page_title]
-        slug = params[:page_title].fancy
-        self.model.slug = slug
-
-        i = 0
-        while self.model.siblings.any? {|sibling| sibling.slug == self.model.slug }
-          i += 1
-          self.model.slug = slug + "-#{i}"
-        end
-
-        self.model.breadcrumb = params[:page_title]
-        self.model.status ||= Status['draft']
-        self.model.site = self.model.parent.site if self.model.parent
-        self.model.layout ||= Layout.find_by_name("page")
-        
-        if params[:multilingual]
-        	multilingual_group = MultilingualGroup.create
-        	self.model.multilingual_group = multilingual_group
-        	
-        	params[:multilingual].each_pair do |lang, flags|
-        		create_other_language_page(lang, self.model, multilingual_group, !flags[:notify].nil?) if flags[:create]			
-        	end
-        end
-        
-        self.model.save!
-
-        redirect_to edit_admin_page_path(self.model)
+      if params[:page_type].blank?
+        self.model = model_class.new_with_defaults(config)
+      else
+        self.model = params[:page_type].constantize.new
+        self.model.parent_id = params[:parent_id] if params[:parent_id]
       end
+
+      if params[:parent_id].blank?
+        self.model.slug = '/'
+      end
+
+      self.model.title = params[:page_title]
+      slug = params[:page_title].fancy
+      self.model.slug = slug
+
+      i = 0
+      while self.model.siblings.any? {|sibling| sibling.slug == self.model.slug }
+        i += 1
+        self.model.slug = slug + "-#{i}"
+      end
+
+      self.model.breadcrumb = params[:page_title]
+      self.model.status ||= Status['draft']
+      self.model.site = self.model.parent.site if self.model.parent
+      self.model.layout ||= Layout.find_by_name("page")
+      
+      if params[:multilingual]
+      	multilingual_group = MultilingualGroup.create
+      	self.model.multilingual_group = multilingual_group
+      	
+      	params[:multilingual].each_pair do |lang, flags|
+      		create_other_language_page(lang, self.model, multilingual_group, !flags[:notify].nil?) if flags[:create]			
+      	end
+      end
+      
+      self.model.save!
+
+      redirect_to edit_admin_page_path(self.model)
+    end
   end
 end

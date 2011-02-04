@@ -4,7 +4,7 @@ Event.addBehavior({
     var link = $(event.target);
     var new_page_form = $('new_page_form');
 
-    new_page_form.parent_id = link.href.match(/(\d+)\/children\/new$/)[1];
+    new_page_form.parent_id.setValue(link.href.match(/(\d+)\/children\/new$/)[1]);
     new_page_form.page_title.setValue('');
     new_page_form.page_type.setValue('');
 
