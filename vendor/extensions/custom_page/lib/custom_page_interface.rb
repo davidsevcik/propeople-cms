@@ -8,7 +8,7 @@ module CustomPageInterface
 
       include InstanceMethods     
       
-      alias_method_chain :new, :page_type
+      #alias_method_chain :new, :page_type
       
       
     	protected
@@ -64,7 +64,7 @@ module CustomPageInterface
     	@languages = YAML::load(Radiant::Config['multilingual.languages'])
    	end
    	
-   	def new_with_page_type
+   	def precreate
         if params[:page_type].blank?
           self.model = model_class.new_with_defaults(config)
         else
