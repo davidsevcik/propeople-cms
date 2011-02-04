@@ -1,0 +1,25 @@
+%table
+  %tr
+    %th Soubor
+    %td
+      = @page_attachment.filename
+      = hidden_field_tag "page[attachments_attributes][#{params[:list_id]}][id]", @page_attachment.id
+      = hidden_field_tag "page[attachments_attributes][#{params[:list_id]}][_destroy]", "0"
+      = hidden_field_tag "page[attachments_attributes][#{params[:list_id]}][position]", @page_attachment.position
+  %tr
+    %th
+      %label{:for => 'title_input'} Titulek
+    %td
+      %input#title_input{:size => '60', :name => "page[attachments_attributes][#{params[:list_id]}][title]", :value => @page_attachment.title}
+  %tr
+    %th
+      %label{:for => 'description_input'} Popisek
+    %td
+      %input#description_input{:size => '60', :name => "page[attachments_attributes][#{params[:list_id]}][description]", :value => @page_attachment.description}
+  %tr
+    %th
+      %label{:for => 'flag_select'} Příznak
+    %td
+      - flag_options = options_for_select([['žádný', '']] + @flags.map {|flag| [flag, flag]} + [['nový příznak', 'new_flag']], @page_attachment.flag)
+      = select_tag "page[attachments_attributes][#{params[:list_id]}][flag]", flag_options, :id => 'flag_select'
+      
