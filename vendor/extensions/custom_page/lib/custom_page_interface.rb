@@ -8,7 +8,7 @@ module CustomPageInterface
 
       include InstanceMethods
 
-      def new
+      def new_with_page_type
         if params[:page_type].blank?
           self.model = model_class.new_with_defaults(config)
         else
@@ -48,6 +48,8 @@ module CustomPageInterface
 
         redirect_to edit_admin_page_path(self.model)
       end
+      
+      alias_method_chain :new, :page_type
       
       
     	protected
