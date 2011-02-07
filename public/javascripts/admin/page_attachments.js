@@ -32,7 +32,6 @@ Event.addBehavior({
   '#edit_page:submit': function(event) {
     $('attachment_upload_blueprint').remove();
     $$('div.attachment_upload select.flag_select').each(function(flagSelect) {
-      alert(flagSelect.name);
       if (flagSelect.getValue() == 'new_flag') {
         flagSelect.next('input[name=new_flag]').writeAttribute('name', flagSelect.name);
         flagSelect.remove();
