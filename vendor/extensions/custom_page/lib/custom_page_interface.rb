@@ -100,6 +100,7 @@ module CustomPageInterface
       	end
       end
       
+      debugger
       self.model.save!
 
       redirect_to edit_admin_page_path(self.model)
