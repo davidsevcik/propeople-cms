@@ -8,10 +8,10 @@
   - unless @page.attachments.count.zero?
     %ol#attachment_list
       = render :partial => 'attachment', :collection => @page.attachments
-    %div{:style => "clear:both;"}
-      %a.add-link{:href => 'javascript:void(0)'}
-        = image_tag('admin/plus.png', :alt => 'add')
-        %strong Přidat
+  %div{:style => "clear:both;"}
+    %a.add-link{:href => 'javascript:void(0)'}
+      = image_tag('admin/plus.png', :alt => 'add')
+      %strong Přidat
   %div{:style => 'display:none;'}
     %div#attachment_upload_blueprint.attachment_upload
       %p.title Nahrát soubor
