@@ -13,7 +13,6 @@ class ProductPage < Page
   
   def create_parts
     self.layout = Layout.find_by_name('product')
-    self.show_in_menu = false
     self.save!
     parts.create(:name => 'hlavni_popis', :content => '', :filter_id => 'CKEditor')
     parts.create(:name => 'podrobnosti', :title => 'Podrobnosti', :content => '', :filter_id => 'CKEditor')

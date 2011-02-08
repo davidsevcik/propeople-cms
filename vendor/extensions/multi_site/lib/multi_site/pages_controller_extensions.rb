@@ -13,15 +13,7 @@ module MultiSite::PagesControllerExtensions
   end
 
   def index_with_root
-    if params[:root] || session[:root_page_id] # If a root page is specified
-    	session[:root_page_id] = params[:root] if params[:root]
-      @homepage = Page.find(session[:root_page_id])
-      @site = @homepage.site  
-    elsif @site = Site.first(:order => "position ASC") # If there is a site defined
-      if @site.homepage
-        @homepage = @site.homepage
-      end
-    end
+    current_site
     @homepage ||= Page.find_by_parent_id(nil)
     response_for :plural
   end
@@ -33,6 +25,23 @@ module MultiSite::PagesControllerExtensions
   
   def continue_url_with_site(options={})
     options[:redirect_to] || (params[:continue] ? edit_admin_page_url(model) : admin_pages_url(:root => model.root.id))
+  end
+  
+  
+  def current_site
+    if @site.nil?
+      if params[:root] || session[:root_page_id] # If a root page is specified
+      	session[:root_page_id] = params[:root] if params[:root]
+        @homepage = Page.find(session[:root_page_id])
+        @site = @homepage.site  
+      elsif @site = Site.first(:order => "position ASC") # If there is a site defined
+        if @site.homepage
+          @homepage = @site.homepage
+        end
+      end
+    end
+    
+    return @site
   end
 
 end

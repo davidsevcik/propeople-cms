@@ -19,5 +19,7 @@ class AlcaplastExtension < Radiant::Extension
     # tab 'Content' do
     #   add_item "Alcaplast", "/admin/alcaplast", :after => "Pages"
     # end
+    
+    Page.send :include, AlcaplastTags
   end
 end

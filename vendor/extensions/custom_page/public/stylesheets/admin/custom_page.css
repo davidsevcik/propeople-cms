@@ -41,3 +41,57 @@
 #content form .buttons a.delete { color: red; }
 
 #content form .buttons button, #content form .buttons input.button { font-size: 110%; }
+
+
+
+
+#translations {
+  clear: both;
+  color: #333;
+  background: #f5f1e2 url(/images/admin/vertical_tan_gradient.png) repeat-x top;
+  margin: 10px 0;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  overflow: hidden;
+}
+#translations h3 {
+  font-size: 16px;
+  padding: 7px 0;
+}
+#translations h3, #translations p.notice {
+  background: #eae3c5;
+  margin: 0;
+  padding: 0.5em;
+}
+#translations ol {
+  list-style: none;
+  padding: 0 10px 0 10px;
+  margin: 0;
+}
+#translations ol li {
+  margin-left: 0;
+}
+#translations ol li div {
+  float: left;
+  width: 25px;
+}
+#translations ol li a.thumbnail {
+  float: left;
+  margin: 0 10px 0 10px;
+}
+#translations ol li p {
+  margin: 0 0 5px 0;
+}
+#translations ol li {
+  border-bottom: 1px dashed #cccccc;
+  width: 100%;
+  padding: 8px 0;
+}
+#attachments ol li:last-child {
+  border-bottom: none;
+}
+
+#translation_list { clear: both; }
+
+

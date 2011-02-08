@@ -3,7 +3,8 @@ module CustomPage
     def self.included(base)
       base.class_eval do  
       
-      	belongs_to :multilingual_group	
+      	belongs_to :multilingual_group
+      	
 
         def self.extended_page_type(options={})
           options.reverse_merge!(:for_editor => true)
@@ -47,6 +48,16 @@ module CustomPage
         
         def full_url
         	self.site.url(self.url)
+        end
+        
+        
+        def translations
+          Page.all(:conditions => ['multilingual_group_id = ? AND id != ?', self.multilingual_group, self.id])
+        end
+        
+        def translation_for_site(site_id)
+          site_id = site_id.id if site_id.is_a? Site
+          Page.first(:conditions => ['multilingual_group_id = ? AND site_id = ?', self.multilingual_group, site_id])
         end
       end
     end

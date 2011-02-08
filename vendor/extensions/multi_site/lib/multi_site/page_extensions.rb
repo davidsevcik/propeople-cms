@@ -14,7 +14,6 @@ module MultiSite::PageExtensions
   module ClassMethods
     def find_by_url_with_sites(url, live=true)
       root = find_by_parent_id(nil)
-      debugger
       if self.current_site.is_a?(Site)
         root = self.current_site.homepage
       end

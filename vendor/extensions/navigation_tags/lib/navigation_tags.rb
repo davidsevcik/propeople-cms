@@ -92,7 +92,7 @@ module NavigationTags
         child_page.class_name != 'ArchivePage' and 
         (@expand_all || current_page.url.starts_with?(child_page.url) )
       r << "<ul>\n"
-      child_page.children.each do |child|
+      allowed_children.each do |child|
         r << tag.render('sub-nav', :page => child, :depth => depth.to_i - 1 )
       end
       r << "</ul>\n"

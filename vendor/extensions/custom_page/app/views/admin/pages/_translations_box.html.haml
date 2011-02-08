@@ -1,0 +1,13 @@
+#translations
+  %h3 Překlady 
+  %ol#translation_list
+    - @sites.each do |site|
+      - unless @site == site
+        %li
+          %strong= @languages[site.language] + ': '
+          - translation = @page.translation_for_site(site)
+          - if translation
+            = link_to(translation.title, edit_admin_page_path(translation))
+          - else
+            neexituje
+            = link_to('Založit', translate_new_admin_page_path(:base_page_id => @page.id, :language => site.language)) 

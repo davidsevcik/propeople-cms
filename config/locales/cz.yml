@@ -240,7 +240,7 @@ cz:
   save: Uložit
   title: Titulek
   for_translation: Čeká na překlad
-  for_translation_notify: Čeká na překlad
+  for_translation_notify: Čeká na překlad (upozornit předladatele)
 
   settings_ext:
     key: 'Název'
