@@ -1,4 +1,4 @@
-#Page.rebuild!
+Page.rebuild!
 
 Page.all.each{|page| page.update_attribute(:slug, page.slug.downcase) }
 
