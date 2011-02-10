@@ -51,9 +51,8 @@ module Technoweenie # :nodoc:
               image.resize!(cols<1 ? 1 : cols, rows<1 ? 1 : rows ) 
             end
             img.background_color = "white"
-            x_offset = -(img.columns - dimensions[0].to_i) / 2
-            y_offset = -(img.rows - dimensions[1].to_i) / 2
-            puts 'OFFSETY: ', x_offset, y_offset
+            x_offset = (img.columns - dimensions[0].to_i) / 2
+            y_offset = (img.rows - dimensions[1].to_i) / 2
             img = img.extent(dimensions[0].to_i, dimensions[1].to_i, x_offset, y_offset)
           else
             img.change_geometry(size.to_s) { |cols, rows, image| image.resize!(cols<1 ? 1 : cols, rows<1 ? 1 : rows) }
