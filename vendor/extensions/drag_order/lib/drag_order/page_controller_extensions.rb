@@ -5,20 +5,20 @@ module DragOrder::PageControllerExtensions
     @old_parent = @page.parent
     @current_position = params[:pos].to_i
     
-    ensure_no_nil_position_values
+    #ensure_no_nil_position_values
     
-    remove_page_from_old_position unless copying?
+    #remove_page_from_old_position unless copying?
     
     @target = Page.find(params[:rel])
     
-    make_room_for_page if @current_position != 2
+    #make_room_for_page if @current_position != 2
     
     if copying?
       @orig_parts = @page.parts
       @page = @page.clone
     end
     
-    @target.reload
+    #@target.reload
     
     put_page
     
@@ -37,44 +37,50 @@ private
     params[:copy].to_i > 0
   end
   
-  def ensure_no_nil_position_values
-    if @page.newly_created_siblings?
-      i = 1
-      @page.siblings_and_self.each do |p|
-        p.position = i
-        p.save
-        i += 1
-      end
-      @page.reload
-    end
-  end
-  
-  def remove_page_from_old_position
-    @page.following_siblings.each do |sibling|
-      sibling.position -= 1
-      sibling.save!
-    end
-  end
+#  def ensure_no_nil_position_values
+#    if @page.newly_created_siblings?
+#      i = 1
+#      @page.siblings_and_self.each do |p|
+#        p.position = i
+#        p.save
+#        i += 1
+#      end
+#      @page.reload
+#    end
+#  end
+#  
+#  def remove_page_from_old_position
+#    @page.following_siblings.each do |sibling|
+#      sibling.position -= 1
+#      sibling.save!
+#    end
+#  end
   
   def put_page
     if @current_position != 2
-      @page.parent = @target.parent
-      @page.position = @target.position.to_i + (@current_position == 1 ? 1 : -1)
+      #@page.parent = @target.parent
+      #@page.position = @target.position.to_i + (@current_position == 1 ? 1 : -1)
+      if @current_position == 1
+        @page.move_to_right_of(@target)
+      else
+        @page.move_to_left_of(@target)
+      end
     else
-      @page.parent = @target
-      @page.position = 1
+      #@page.parent = @target
+      #@page.position = 1
+      @page.move_to_child_of(@target)
     end
   end
   
-  def make_room_for_page
-    new_siblings = Page.children_of_after_position(@target.parent_id, @target.position + @current_position)
-    new_siblings.each do |sibling|
-      if sibling != @page || copying?
-        sibling.position += 1
-        sibling.save!
-      end
-    end
-  end
+#  def make_room_for_page
+#    new_siblings = Page.children_of_after_position(@target.parent_id, @target.position + @current_position)
+#    new_siblings.each do |sibling|
+#      if sibling != @page || copying?
+#        sibling.position += 1
+#        sibling.save!
+#      end
+#    end
+#  end
   
   def new_parent_different?
     # @page.parent.changed? always gives false...

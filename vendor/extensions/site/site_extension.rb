@@ -18,6 +18,8 @@ class SiteExtension < Radiant::Extension
   def activate
 
     Page.send :include, SiteTags
+    Page.send :acts_as_nested_set
+    
     ApplicationHelper.module_eval do
       def meta_label
         meta_errors? ? 'Méně' : 'Více'

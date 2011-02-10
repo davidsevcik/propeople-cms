@@ -179,6 +179,8 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer  "site_id"
     t.integer  "multilingual_group_id"
     t.integer  "position",                             :default => 0
+    t.integer  "lft"
+    t.integer  "rgt"
   end
 
   add_index "pages", ["class_name"], :name => "pages_class_name"
