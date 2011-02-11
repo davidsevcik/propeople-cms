@@ -1,6 +1,8 @@
 module MultiSite::PagesControllerExtensions
   def self.included(base)
     base.class_eval do
+      prepend_before_filter :load_site
+    
       alias_method_chain :index, :root
       alias_method_chain :continue_url, :site
       alias_method_chain :remove, :back
@@ -13,8 +15,8 @@ module MultiSite::PagesControllerExtensions
   end
 
   def index_with_root
-    current_site
-    @homepage ||= Page.find_by_parent_id(nil)
+    @homepage = @site.homepage
+    #@homepage ||= Page.find_by_parent_id(nil)
     response_for :plural
   end
 
@@ -27,21 +29,19 @@ module MultiSite::PagesControllerExtensions
     options[:redirect_to] || (params[:continue] ? edit_admin_page_url(model) : admin_pages_url(:root => model.root.id))
   end
   
-  
-  def current_site
-    if @site.nil?
-      if params[:root] || session[:root_page_id] # If a root page is specified
-      	session[:root_page_id] = params[:root] if params[:root]
-        @homepage = Page.find(session[:root_page_id])
-        @site = @homepage.site  
-      elsif @site = Site.first(:order => "position ASC") # If there is a site defined
-        if @site.homepage
-          @homepage = @site.homepage
-        end
-      end
+  def load_site
+    if params[:root] || session[:root_page_id] # If a root page is specified
+    	session[:root_page_id] = params[:root] if params[:root]
+      homepage = Page.find(session[:root_page_id])
+      @site = homepage.site  
+    else 
+      @site = Site.first(:order => "position ASC") # If there is a site defined
     end
-    
-    return @site
+  end
+  
+  def change_site(site)
+    @site = site.is_a?(Site) ? site : Site.find(site)
+    session[:root_page_id] = @site.homepage_id
   end
 
 end

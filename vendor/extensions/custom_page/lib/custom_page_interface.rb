@@ -1,8 +1,7 @@
 module CustomPageInterface
   def self.included(base)
     base.class_eval do
-      before_filter :add_custom_page_creation_partials, :only => [:index]
-      before_filter :add_specific_fields, :only => [:edit]   
+      before_filter :add_custom_page_partials, :only => [:index, :edit]
       before_filter :load_languages, :only => [:index, :edit]
       before_filter :add_translation_partial, :only => [:edit]
       
@@ -13,28 +12,15 @@ module CustomPageInterface
 
 
   module InstanceMethods
-    def add_custom_page_creation_partials
+    def add_custom_page_partials
       include_javascript 'admin/modalbox'
       include_stylesheet 'admin/modalbox'
       include_javascript 'admin/custom_page'
       include_stylesheet 'admin/custom_page'
     end
 
-    def add_specific_fields
-      include_javascript 'admin/custom_page'
-      include_stylesheet 'admin/custom_page'
-
-      #if page.respond_to?(:fields)
-      #  @buttons_partials ||= []
-      #  @buttons_partials << "specific_fields_box"  
-
-      #  @fields = page.fields
-      #  @field_columns = page.fields.class.columns_hash
-      #end
-    end
     
     def load_languages
-      @site = current_site
       @sites = Site.all
     	@languages = YAML::load(Radiant::Config['multilingual.languages'])
    	end
@@ -53,38 +39,28 @@ module CustomPageInterface
       end
 
       page.title = params[:page_title]
-      slug = params[:page_title].fancy
-      page.slug = slug
-
-      i = 0
-      while page.siblings.any? {|sibling| sibling.slug == page.slug }
-        i += 1
-        page.slug = slug + "-#{i}"
-      end
-
+      page.auto_slug
       page.breadcrumb = params[:page_title]
       page.status ||= Status['draft']
       page.site = page.parent.site if page.parent
       page.layout ||= Layout.find_by_name("page")
+      page.create_multilingual_group 
+      page.save!
       
       if params[:multilingual]
-      	multilingual_group = MultilingualGroup.create
-      	page.multilingual_group = multilingual_group
-      	
       	params[:multilingual].each_pair do |lang, flags|
       		create_translation(lang, page, !flags[:notify].nil?) if flags[:create]			
       	end
-      end
-      
-      page.save!
+      end     
 
       redirect_to edit_admin_page_path(page)
     end
     
     
-    def translate
-      base_page = Page.find(params[:base_page_id])      
+    def translate_page
+      base_page = Page.find(params[:id])      
       translation = create_translation(params[:language], base_page)
+      change_site(translation.site)
       redirect_to edit_admin_page_path(translation)
     end
    
@@ -105,7 +81,7 @@ module CustomPageInterface
 			page.parent = lang_parent
 			page.title = "[#{base_page.title}]"
 			page.breadcrumb = page.title
-			page.slug = "translate-#{base_page.slug}"
+			page.slug = "translate-#{base_page.id}-#{lang}"
 			page.status = notify ? Status[:for_translation_notify] : Status[:for_traslation]
 			page.multilingual_group_id = base_page.multilingual_group_id
 			page.save!

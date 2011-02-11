@@ -1,27 +1,28 @@
 #new_page_popup{:style => 'display:none'}
-  - form_tag precreate_new_admin_page_url, :id => 'new_page_form', :method => 'post' do
+  - form_tag(url_for(@page ? {:action => 'translate_page'} : {:action => 'precreate'}), :id => 'new_page_form', :method => 'post') do
     %input{:name => 'parent_id', :type => 'hidden', :value => ''}
     %table
       %tr
         %th= label_tag 'page_title', 'Titulek stránky'
         %td= text_field_tag 'page_title', '', :size => 40
-      %tr
-        %th= label_tag 'page_type', 'Typ stránky'
-        - options = Page.descendants.map { |p| [p.name == 'NormalPage' ? '<normalní>' : p.display_name, p.name] if p.type_for_editor? }.compact.sort_by { |p| p.first }
-        %td= select_tag 'page_type', options_for_select(options)
-      %tr
-        %th{:style => 'vertical-align:top; padding-top:8px;'} Vytvořit jazykové verze
-        %td
-          %table
-            - @sites.each do |site|
-              - if @site != site
-                %tr
-                  %td.multilingual-key
-                    = check_box_tag "multilingual[#{site.language}][create]"
-                    = @languages[site.language]
-                  %td
-                    = check_box_tag "multilingual[#{site.language}][notify]"
-                    Upozornit překladatele
+      - unless @page  # pokud se nejedna o preklad stranky
+        %tr
+          %th= label_tag 'page_type', 'Typ stránky'
+          - options = Page.descendants.map { |p| [p.name == 'NormalPage' ? '<normalní>' : p.display_name, p.name] if p.type_for_editor? }.compact.sort_by { |p| p.first }
+          %td= select_tag 'page_type', options_for_select(options)
+        %tr
+          %th{:style => 'vertical-align:top; padding-top:8px;'} Vytvořit jazykové verze
+          %td
+            %table
+              - @sites.each do |site|
+                - if @site != site
+                  %tr
+                    %td.multilingual-key
+                      = check_box_tag "multilingual[#{site.language}][create]"
+                      = @languages[site.language]
+                    %td
+                      = check_box_tag "multilingual[#{site.language}][notify]"
+                      Upozornit překladatele
     %p
       = submit_tag 'Vytvořit'
       nebo

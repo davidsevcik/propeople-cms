@@ -331,3 +331,5 @@ cz:
         street: 'Ulice'
         city: 'Město'
         zip: 'PSČ'
+        
+  sites: Weby

@@ -4,6 +4,7 @@ module CustomPage
       base.class_eval do  
       
       	belongs_to :multilingual_group
+      	before_save :check_translation
       	
 
         def self.extended_page_type(options={})
@@ -55,9 +56,27 @@ module CustomPage
           Page.all(:conditions => ['multilingual_group_id = ? AND id != ?', self.multilingual_group, self.id])
         end
         
+        
         def translation_for_site(site_id)
           site_id = site_id.id if site_id.is_a? Site
           Page.first(:conditions => ['multilingual_group_id = ? AND site_id = ?', self.multilingual_group, site_id])
+        end
+        
+        
+        def auto_slug
+          temp_slug = self.title.fancy.downcase
+          self.slug = temp_slug
+
+          i = 0
+          while self.siblings.any? {|sibling| sibling.slug == self.slug }
+            i += 1
+            self.slug = temp_slug + "-#{i}"
+          end
+        end
+        
+        
+        def check_translation
+          auto_slug if self.status_id_changed? && self.status_id == 100 && self.slug =~ /^translate/
         end
       end
     end

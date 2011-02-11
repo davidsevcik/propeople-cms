@@ -10,4 +10,4 @@
             = link_to(translation.title, edit_admin_page_path(translation))
           - else
             neexituje
-            = link_to('Založit', translate_new_admin_page_path(:base_page_id => @page.id, :language => site.language)) 
+            = link_to('Založit', {:action => :translate_page, :id => @page.id, :language => site.language}, :method => :post) 

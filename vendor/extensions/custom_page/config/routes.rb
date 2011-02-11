@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
-    admin.resources :pages, :new => {:precreate => :post, :translate => :post}
+    admin.resources :pages, :collection => {:precreate => :post}, :member => {:translate_page => :post}
   end
 end
