@@ -49,4 +49,9 @@ class Site < ActiveRecord::Base
   def reload_routes
     ActionController::Routing::Routes.reload
   end
+  
+  
+  def language_name
+    YAML::load(Radiant::Config['multilingual.languages'])[self.language]
+  end
 end
