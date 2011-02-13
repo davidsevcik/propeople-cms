@@ -37,6 +37,7 @@ class Site < ActiveRecord::Base
                            :slug => "#{self.name.to_slug}", :breadcrumb => "Home")
         default_status = Radiant::Config['defaults.page.status']
         self.homepage.status = Status[default_status] if default_status
+        self.homepage.site_id = self.id
         default_parts = Radiant::Config['defaults.page.parts'].to_s.strip.split(/\s*,\s*/)
         default_parts.each do |name|
           self.homepage.parts << PagePart.new(:name => name, :filter_id => Radiant::Config['defaults.page.filter'])
