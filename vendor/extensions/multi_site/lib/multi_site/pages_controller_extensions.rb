@@ -1,7 +1,7 @@
 module MultiSite::PagesControllerExtensions
   def self.included(base)
     base.class_eval do
-      prepend_before_filter :load_site
+      before_filter :load_site
     
       alias_method_chain :index, :root
       alias_method_chain :continue_url, :site
