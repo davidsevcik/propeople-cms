@@ -30,9 +30,6 @@ module MultiSite::PagesControllerExtensions
   end
   
   def load_site
-    logfile = File.open("#{RAILS_ROOT}/log/mylog.log")
-    mylog = Logger.new(logfile)
-    
     if params[:root] || session[:root_page_id] # If a root page is specified
       homepage = Page.find(params[:root] || session[:root_page_id])
       @site = homepage.site  
@@ -41,7 +38,7 @@ module MultiSite::PagesControllerExtensions
       @site = Site.first(:order => "position ASC") # If there is a site defined
     end
     
-    mylog.info "SITE " + @site.inspect
+    logger.info "SITE " + @site.inspect
   end
   
   def change_site(site)
