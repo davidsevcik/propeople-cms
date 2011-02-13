@@ -14,13 +14,13 @@ module MultiSite::PagesControllerExtensions
     end
   end
 
-  def index
-    @homepage = @site.homepage
-    #@homepage ||= Page.find_by_parent_id(nil)
-    logger.info "SITE (index_with_root)" + @site.inspect
-    logger.info "HOMEPAGE (index_with_root)" + @homepage.inspect
-    response_for :plural
-  end
+#  def index
+#    @homepage = @site.homepage
+#    #@homepage ||= Page.find_by_parent_id(nil)
+#    logger.info "SITE (index_with_root)" + @site.inspect
+#    logger.info "HOMEPAGE (index_with_root)" + @homepage.inspect
+#    response_for :plural
+#  end
 
   def remove_with_back
     session[:came_from] = request.env["HTTP_REFERER"]
@@ -40,12 +40,14 @@ module MultiSite::PagesControllerExtensions
       @site = Site.first(:order => "position ASC") # If there is a site defined
     end
     
+    @homepage = @site.homepage
     logger.info "SITE (load_site)" + @site.inspect
   end
   
   def change_site(site)
     @site = site.is_a?(Site) ? site : Site.find(site)
-    session[:root_page_id] = @site.homepage_id
+    @homepage = @site.homepage
+    session[:root_page_id] = @homepage.id
   end
 
 end
