@@ -31,9 +31,9 @@ module MultiSite::PagesControllerExtensions
   
   def load_site
     if params[:root] || session[:root_page_id] # If a root page is specified
-    	session[:root_page_id] = params[:root] if params[:root]
-      homepage = Page.find(session[:root_page_id])
+      homepage = Page.find(params[:root] || session[:root_page_id])
       @site = homepage.site  
+      session[:root_page_id] = homepage.id
     else 
       @site = Site.first(:order => "position ASC") # If there is a site defined
     end
