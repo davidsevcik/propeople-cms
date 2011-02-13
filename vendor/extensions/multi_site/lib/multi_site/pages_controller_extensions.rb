@@ -17,6 +17,8 @@ module MultiSite::PagesControllerExtensions
   def index_with_root
     @homepage = @site.homepage
     #@homepage ||= Page.find_by_parent_id(nil)
+    logger.info "SITE (index_with_root)" + @site.inspect
+    logger.info "HOMEPAGE (index_with_root)" + @homepage.inspect
     response_for :plural
   end
 
@@ -38,7 +40,7 @@ module MultiSite::PagesControllerExtensions
       @site = Site.first(:order => "position ASC") # If there is a site defined
     end
     
-    logger.info "SITE " + @site.inspect
+    logger.info "SITE (load_site)" + @site.inspect
   end
   
   def change_site(site)
