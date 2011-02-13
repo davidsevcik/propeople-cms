@@ -3,7 +3,7 @@ module MultiSite::PagesControllerExtensions
     base.class_eval do
       before_filter :load_site
     
-      alias_method_chain :index, :root
+      #alias_method_chain :index, :root
       alias_method_chain :continue_url, :site
       alias_method_chain :remove, :back
       responses.destroy.default do 
@@ -14,7 +14,7 @@ module MultiSite::PagesControllerExtensions
     end
   end
 
-  def index_with_root
+  def index
     @homepage = @site.homepage
     #@homepage ||= Page.find_by_parent_id(nil)
     logger.info "SITE (index_with_root)" + @site.inspect
