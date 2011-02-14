@@ -94,4 +94,6 @@
 
 #translation_list { clear: both; }
 
+#site-indication { float:right; font-weight: bold; margin-top: -5px; }
+
 

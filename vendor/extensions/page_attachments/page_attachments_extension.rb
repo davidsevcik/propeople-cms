@@ -13,8 +13,8 @@ class PageAttachmentsExtension < Radiant::Extension
 
   def activate
     if self.respond_to?(:tab)
-      tab "Attachments" do
-        add_item 'List', "/admin/page_attachments"
+      tab "Settings" do
+        add_item 'Attachments', "/admin/page_attachments"
       end
     else
       admin.tabs.add 'Attachments', '/admin/page_attachments', :after => "Layouts", :visibility => [:admin]

@@ -11,7 +11,19 @@ Event.addBehavior({
     Modalbox.show(new_page_form, {title: 'Nová podstránka', width: 500});
 
     event.stop();
-  }
+  }/*,
+  
+  '#edit_page #translations a:click': function(event) {
+    var link = $(event.target);
+    var new_page_form = $('new_page_form');
+
+    new_page_form.action = link.href;
+    new_page_form.page_title.setValue('');
+
+    Modalbox.show(new_page_form, {title: 'Překlad stránky', width: 500});
+
+    event.stop();
+  }*/
 });
 
 

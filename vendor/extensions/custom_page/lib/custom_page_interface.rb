@@ -49,7 +49,7 @@ module CustomPageInterface
       
       if params[:multilingual]
       	params[:multilingual].each_pair do |lang, flags|
-      		create_translation(lang, page, !flags[:notify].nil?) if flags[:create]			
+      		page.create_translation(lang, !flags[:notify].nil?) if flags[:create]			
       	end
       end     
 
@@ -59,7 +59,7 @@ module CustomPageInterface
     
     def translate_page
       base_page = Page.find(params[:id])      
-      translation = create_translation(params[:language], base_page)
+      translation = base_page.create_translation(params[:language])
       change_site(translation.site)
       redirect_to edit_admin_page_path(translation)
     end
@@ -67,29 +67,6 @@ module CustomPageInterface
    
    
   protected 	
-    	
-  	def create_translation(lang, base_page, notify=true)
-  		site = Site.find_by_language(lang.to_s)
-			if base_page.parent && base_page.parent.multilingual_group_id
-				lang_parent = Page.find_by_site_id_and_multilingual_group_id(site.id, base_page.parent.multilingual_group_id)
-			end
-			
-			lang_parent ||= site.homepage
-			
-		  page = base_page.class_name.constantize.new		
-			page.site = site
-			page.parent = lang_parent
-			page.title = "[#{base_page.title}]"
-			page.breadcrumb = page.title
-			page.slug = "translate-#{base_page.id}-#{lang}"
-			page.status = notify ? Status[:for_translation_notify] : Status[:for_traslation]
-			page.multilingual_group_id = base_page.multilingual_group_id
-			page.save!
-			MultilingualMailer.deliver_translator_notification(page, lang) if notify
-			
-			return page
-		end 		
-		
 		
 		
 		def add_translation_partial

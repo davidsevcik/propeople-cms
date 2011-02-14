@@ -24,6 +24,7 @@ class CustomPageExtension < Radiant::Extension
     admin.page.index.add :bottom, 'new_page_form'
     admin.page.edit.add :layout_row, "published_at_select"
     admin.page.edit.add :layout_row, "show_in_menu"
+    admin.page.edit.add :main, "site_indication", :before => 'edit_header'
     #admin.page.edit.add :edit_popups, "new_page_form"
   end
 end

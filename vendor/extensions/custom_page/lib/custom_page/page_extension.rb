@@ -78,6 +78,45 @@ module CustomPage
         def check_translation
           auto_slug if self.status_id_changed? && self.status_id == 100 && self.slug =~ /^translate/
         end
+        
+        
+        def create_translation(lang, notify=true)
+      		site = Site.find_by_language(lang.to_s)
+			    if self.parent && self.parent.multilingual_group_id
+				    lang_parent = Page.find_by_site_id_and_multilingual_group_id(site.id, self.parent.multilingual_group_id)
+			    end
+			
+			    lang_parent ||= site.homepage
+			
+		      page = self.class_name.blank? ? Page.new : self.class_name.constantize.new		
+			    page.site = site
+			    page.parent = lang_parent
+			    page.title = "[#{self.title}]"
+			    page.breadcrumb = page.title
+			    page.slug = "translate-#{self.id}-#{lang}"
+			    page.status = notify ? Status[:for_translation_notify] : Status[:for_traslation]
+			    page.multilingual_group_id = self.multilingual_group_id
+			    page.save!
+			    debugger
+			    
+			    self.parts.each do |prt|
+			      trans_part = page.parts.find_by_name(prt.name)
+			      if trans_part
+			        trans_part.content = prt.content
+			        trans_part.title = prt.title
+			        trans_part.filter_id = prt.filter_id
+			        trans_part.position = prt.position
+			        trans_part.save!
+			      else
+			        page.parts.create(:name => prt.name, :content => prt.content, :filter_id => prt.filter_id, 
+			          :position => prt.position, :title => prt.title)
+			      end
+			    end
+			    
+			    MultilingualMailer.deliver_translator_notification(page, lang) if notify
+			
+			    return page
+		    end 		
       end
     end
 
