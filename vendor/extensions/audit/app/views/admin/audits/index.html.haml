@@ -1,0 +1,12 @@
+%h1= "Audit Log for #{params[:date].strftime("%B %d, %Y")}"
+
+= render :partial => "filter_options"
+
+.outset
+  = render :partial => "results_table"
+  
+#actions
+  = render :partial => "date_navigation"
+  = will_paginate @audits
+  
+= render :partial => "print_styles"

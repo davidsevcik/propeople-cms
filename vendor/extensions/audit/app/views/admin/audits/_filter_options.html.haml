@@ -1,0 +1,40 @@
+#filtering-options
+  - form_tag admin_audits_path, :method => "get", :id => "audit_filter_form" do
+    %table.FormTable#filtering-table
+      %tbody
+        - if filters_set?
+          %td
+          %td
+            = link_to 'Clear Filters', admin_audits_path, :id => 'remove-filters'
+        %tr
+          %td
+            %label{ :for => "event_type", :class => "Invisible" } Event Type
+            %select{ :name => "event_type", :id => "event_type" }
+              %option{ :value => "" } Event Type
+              %option{ :value => "" } &nbsp;
+              - if audited_event_types.any?
+                = options_for_select(audited_event_types, (params[:event_type]))
+          %td
+            %label.Invisible.OverLabel{ :for => "log" } Log Message
+            = text_field_tag :log, params[:log]
+        %tr
+          %td
+            %label{ :for => "ip", :class => "Invisible" } IP Address
+            %select{ :name => "ip", :id => "ip" }
+              %option{ :value => "" } IP Address
+              %option{ :value => "" } &nbsp;
+              - if audited_ip_addresses.any?
+                = options_for_select(audited_ip_addresses, params[:ip])
+          %td
+            = text_field_tag :date, params[:date].strftime('%B %d, %Y'), :class => "date"
+        %tr
+          %td
+            %label{ :for => "user", :class => "Invisible" } User
+            %select{ :name => "user", :id => "user" }
+              %option{ :value => "" } User
+              %option{ :value => "" } &nbsp;
+              - if audited_users.any?
+                = options_from_collection_for_select(audited_users, "id", "login", (params[:user] || 0).to_i)
+            %td.FormAction
+              = submit_tag("Apply Filter")
+  %span{ :id => "more-or-less-metadata" } Show Filters
