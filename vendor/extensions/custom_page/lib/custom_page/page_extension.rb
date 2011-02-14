@@ -117,9 +117,11 @@ module CustomPage
 			      end
 			    end
 			    
+			    debugger
+			    
 			    self.attachments.find_all_by_copy_to_translation(true).each do |attachment|
 			      file = ActionController::TestUploadedFile.new("public" + attachment.public_filename, attachment.content_type)
-            self.attachments.create(
+            page.attachments.create(
               :uploaded_data => file, 
               :title => attachment.title, 
               :description => attachment.description)
