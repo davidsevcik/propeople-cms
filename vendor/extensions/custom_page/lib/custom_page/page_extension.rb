@@ -1,3 +1,7 @@
+require 'action_controller'
+require 'action_controller/test_process.rb'
+
+
 module CustomPage
   module PageExtension    
     def self.included(base)
@@ -111,6 +115,14 @@ module CustomPage
 			        page.parts.create(:name => prt.name, :content => prt.content, :filter_id => prt.filter_id, 
 			          :position => prt.position, :title => prt.title)
 			      end
+			    end
+			    
+			    self.attachments.find_all_by_copy_to_translation(true).each do |attachment|
+			      file = ActionController::TestUploadedFile.new("public" + attachment.public_filename, attachment.content_type)
+            self.attachments.create(
+              :uploaded_data => file, 
+              :title => attachment.title, 
+              :description => attachment.description)
 			    end
 			    
 			    MultilingualMailer.deliver_translator_notification(page, lang) if notify

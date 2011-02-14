@@ -13,10 +13,11 @@ class Admin::PageAttachmentsController < ApplicationController
   end
   
   
-  def create
+  def create  # ukladani z ckeditoru
   	@attachment = PageAttachment.new
   	@attachment.uploaded_data = params[:upload]
   	@attachment.page_id = params[:page_id]
+  	@attachment.copy_for_translation = false
   	@attachment.save!
   	
   	render :text => "<html><body><script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction('#{params[:CKEditorFuncNum]}', '#{@attachment.public_filename}');</script></body></html>"
