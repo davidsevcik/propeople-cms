@@ -64,7 +64,7 @@ module CustomPage
         
         
         def auto_slug
-          temp_slug = self.title.fancy.downcase
+          temp_slug = self.title.to_url
           self.slug = temp_slug
 
           i = 0
