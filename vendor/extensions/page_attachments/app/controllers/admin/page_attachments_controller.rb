@@ -17,7 +17,7 @@ class Admin::PageAttachmentsController < ApplicationController
   	@attachment = PageAttachment.new
   	@attachment.uploaded_data = params[:upload]
   	@attachment.page_id = params[:page_id]
-  	@attachment.copy_for_translation = false
+  	@attachment.copy_to_translation = false
   	@attachment.save!
   	
   	render :text => "<html><body><script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction('#{params[:CKEditorFuncNum]}', '#{@attachment.public_filename}');</script></body></html>"
