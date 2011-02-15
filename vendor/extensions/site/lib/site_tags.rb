@@ -148,8 +148,6 @@ module SiteTags
     end
     
     
-    puts "ROOT LEVEL #{@root.level}"
-    
     min_level = @root.level
     @depth += @root.level if @depth   
      
@@ -183,7 +181,7 @@ module SiteTags
           tree += "</li>\n" + ("</ul>\n</li>\n" * level_diff.abs)
         end
            
-        tree += "<li#{page == tag.locals.page ? ' class="current"' : ''}><a href=\"#{page.url}\">#{h(page.title)}</a>" 
+        tree += "<li#{page == tag.locals.page ? ' class="current"' : ''}><a href=\"#{page.url}\">#{h(page.breadcrumb)}</a>" 
         last_level = level
       end
     end
