@@ -20,6 +20,16 @@ class SiteExtension < Radiant::Extension
     Page.send :include, SiteTags
     Page.send :acts_as_nested_set
     
+    Page.class_eval do 
+      def self.all_cached
+        if @all_pages.nil?
+          homepage = Page.respond_to?(:current_site) ? Page.current_site.homepage : Page.root
+          @all_pages = homepage.self_and_descendants
+        end
+        @all_pages
+      end
+    end
+    
     ApplicationHelper.module_eval do
       def meta_label
         meta_errors? ? 'Méně' : 'Více'

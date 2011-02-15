@@ -7,7 +7,6 @@ module MultiSite::SiteControllerExtensions
   
   def set_site
     Page.current_site = Site.find_for_host(request.host)
-    logger.info "REQUEST HOST " + request.host 
     true
   end
 end

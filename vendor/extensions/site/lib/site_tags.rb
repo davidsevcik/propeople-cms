@@ -127,4 +127,79 @@ module SiteTags
 
     result.join("\n")
   end
+  
+  
+  
+  tag "nested_menu" do |tag|
+    
+    %w{relative include_root show_all}.each do |prop|
+      eval "@#{prop} = tag.attr.delete('#{prop}') == 'true' ? true : false"
+    end
+  
+    @depth = tag.attr.delete('depth')
+    @depth = @depth && @depth.to_i
+    
+    @root_id = tag.attr.delete('root_id')
+    
+    if @root_id
+      @root = Page.find(@root_id) 
+    else
+      @root = @relative ? tag.locals.page : Page.current_site.homepage
+    end
+    
+    
+    puts "ROOT LEVEL #{@root.level}"
+    
+    min_level = @root.level
+    @depth += @root.level if @depth   
+     
+    unless @include_root
+      min_level += 1
+      @depth += 1 if @depth
+    end 
+    
+    last_level = min_level
+    tree = ''
+    
+    if @all_pages.nil?
+      homepage = Page.respond_to?(:current_site) ? Page.current_site.homepage : Page.root
+      @all_pages = homepage.self_and_descendants
+    end       
+    
+    Page.each_with_level(@all_pages) do |page, level|  
+      if page.left >= @root.left && page.right <= @root.right &&
+          level >= min_level && (!@depth || level < @depth) &&  
+          (@show_all || page.show_in_menu?) && 
+          !page.virtual? && page.published? && !page.part("no-map")
+        
+          
+        level_diff = level - last_level    
+        
+        if level_diff == 0
+          tree += "</li>\n"
+        elsif level_diff == 1
+          tree += "<ul>\n"
+        elsif level_diff < 0
+          tree += "</li>\n" + ("</ul>\n</li>\n" * level_diff.abs)
+        end
+           
+        tree += "<li#{page == tag.locals.page ? ' class="current"' : ''}><a href=\"#{page.url}\">#{h(page.title)}</a>" 
+        last_level = level
+      end
+    end
+    
+    
+    if tag.attr
+      html_options = tag.attr.stringify_keys
+      tag_options = tag_options(html_options)
+    else
+      tag_options = ''
+    end
+    
+    %{<ul#{tag_options}>
+    #{tree}
+    </ul>}
+  end
+  
+
 end
