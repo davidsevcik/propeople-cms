@@ -98,7 +98,7 @@ module CustomPage
 			    page.title = "[#{self.title}]"
 			    page.breadcrumb = page.title
 			    page.slug = "translate-#{self.id}-#{lang}"
-			    page.status = Status[:published] #notify ? Status[:for_translation_notify] : Status[:for_traslation]
+			    page.status = notify ? Status[:for_translation_notify] : Status[:for_traslation]
 			    page.multilingual_group_id = self.multilingual_group_id
 			    page.save!
 			    debugger
