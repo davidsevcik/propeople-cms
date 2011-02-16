@@ -2,13 +2,15 @@ Event.addBehavior({
 
   '#site_map .add_child a:click': function(event) {
     var link = $(event.target);
-    var new_page_form = $('new_page_form');
+      
 
-    new_page_form.parent_id.setValue(link.href.match(/(\d+)\/children\/new$/)[1]);
-    new_page_form.page_title.setValue('');
-    new_page_form.page_type.setValue('NormalPage');
-
-    Modalbox.show(new_page_form, {title: 'Nová podstránka', width: 500});
+    Modalbox.show(new_page_form, {title: 'Nová podstránka', width: 500, afterLoad: function() {
+      var new_page_form = $('new_page_form');
+      new_page_form.parent_id.setValue(link.href.match(/(\d+)\/children\/new$/)[1]);  
+      $('page_title').setValue('');
+      $('page_type').setValue('NormalPage');   
+    }});
+    
 
     event.stop();
   }/*,
