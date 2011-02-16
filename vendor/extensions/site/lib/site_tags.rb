@@ -1,5 +1,6 @@
 module SiteTags
   include Radiant::Taggable
+  include ActionView::Helpers::TagHelper
 
   tag 'if_blank' do |tag|
     part_name = tag_part_name(tag)

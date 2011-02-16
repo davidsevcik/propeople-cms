@@ -6,7 +6,7 @@ Event.addBehavior({
 
     new_page_form.parent_id.setValue(link.href.match(/(\d+)\/children\/new$/)[1]);
     new_page_form.page_title.setValue('');
-    new_page_form.page_type.setValue('');
+    new_page_form.page_type.setValue('NormalPage');
 
     Modalbox.show(new_page_form, {title: 'Nová podstránka', width: 500});
 
@@ -52,5 +52,6 @@ document.observe("dom:loaded", function() {
     }
 
     $('published_at').remove();
+    $('page_class_name').down(0).remove();
   }
 });

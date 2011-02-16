@@ -24,9 +24,9 @@ Radiant::Initializer.run do |config|
 #  config.extensions -= [:dutch_language_pack, :french_language_pack, :german_language_pack,
 #                        :italian_language_pack, :japanese_language_pack, :russian_language_pack]
 
-  config.extensions = [:settings, :multi_site, :mailer, :sns, :edit_area, :layouts,
-                      :drag_order, :navigation_tags, :ck_editor_filter, :page_attachments, :truncate, :custom_page,
-                      :conditional_tags, :page_fields, :back_door, :audit, :alcaplast, :site]
+  config.extensions = [:settings, :multi_site, :custom_page, :mailer, :sns, :edit_area, :layouts, 
+                      :drag_order, :ck_editor_filter, :page_attachments, 
+                      :page_fields, :back_door, :audit, :search, :alcaplast, :site]
 
 
   # Your secret key for verifying cookie session data integrity.

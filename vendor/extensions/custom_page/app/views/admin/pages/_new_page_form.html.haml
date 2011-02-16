@@ -3,12 +3,12 @@
     %input{:name => 'parent_id', :type => 'hidden', :value => ''}
     %table
       %tr
-        %th= label_tag 'page_title', 'Titulek stránky'
+        %th= label_tag 'page_title', 'Titulek'
         %td= text_field_tag 'page_title', '', :size => 40
       - unless @page  # pokud se nejedna o preklad stranky
         %tr
-          %th= label_tag 'page_type', 'Typ stránky'
-          - options = Page.descendants.map { |p| [p.name == 'NormalPage' ? '<normalní>' : p.display_name, p.name] if p.type_for_editor? }.compact.sort_by { |p| p.first }
+          %th= label_tag 'page_type', 'Typ'
+          - options = Page.descendants.map { |p| [p.display_name, p.name] if p.type_for_editor? }.compact.sort_by { |p| p.first }
           %td= select_tag 'page_type', options_for_select(options)
         %tr
           %th{:style => 'vertical-align:top; padding-top:8px;'} Vytvořit jazykové verze
