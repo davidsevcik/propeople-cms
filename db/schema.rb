@@ -11,6 +11,23 @@
 
 ActiveRecord::Schema.define(:version => 20091003095744) do
 
+  create_table "audit_events", :force => true do |t|
+    t.string   "auditable_type"
+    t.integer  "auditable_id"
+    t.integer  "user_id"
+    t.string   "ip_address"
+    t.integer  "audit_type_id"
+    t.text     "log_message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "audit_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "config", :force => true do |t|
     t.string  "key",                :limit => 40, :default => "",    :null => false
     t.string  "value",                            :default => ""
@@ -40,77 +57,6 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
   create_table "multilingual_groups", :force => true do |t|
   end
 
-  create_table "news_categories", :force => true do |t|
-    t.string "name"
-  end
-
-  create_table "news_entries", :force => true do |t|
-    t.string   "headline"
-    t.string   "leadtext"
-    t.text     "text"
-    t.date     "start"
-    t.date     "stop"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "news_category_id"
-  end
-
-  create_table "news_entries_news_categories", :id => false, :force => true do |t|
-    t.integer "news_entry_id"
-    t.integer "news_category_id"
-  end
-
-  create_table "news_entries_news_tags", :id => false, :force => true do |t|
-    t.integer "news_entry_id"
-    t.integer "news_tag_id"
-  end
-
-  create_table "news_entry_pages", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "news_tags", :force => true do |t|
-    t.string "name"
-  end
-
-  create_table "order_items", :force => true do |t|
-    t.integer "product_page_id"
-    t.integer "order_id"
-    t.decimal "price",           :precision => 10, :scale => 2
-    t.integer "quantity",                                       :default => 1
-  end
-
-  add_index "order_items", ["order_id"], :name => "index_order_items_on_order_id"
-  add_index "order_items", ["product_page_id"], :name => "index_order_items_on_product_page_id"
-
-  create_table "order_states", :force => true do |t|
-    t.string "name"
-    t.string "code"
-  end
-
-  create_table "orders", :force => true do |t|
-    t.string   "name"
-    t.string   "surname"
-    t.string   "company"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "street"
-    t.string   "city"
-    t.string   "zip"
-    t.string   "delivery_name"
-    t.string   "delivery_surname"
-    t.string   "delivery_street"
-    t.string   "delivery_city"
-    t.string   "delivery_zip"
-    t.string   "delivery_phone"
-    t.integer  "state_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "orders", ["state_id"], :name => "index_orders_on_state_id"
-
   create_table "page_attachments", :force => true do |t|
     t.string   "content_type"
     t.string   "filename"
@@ -128,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.string   "description"
     t.integer  "position"
     t.string   "flag"
+    t.boolean  "copy_to_translation", :default => true
   end
 
   create_table "page_fields", :force => true do |t|
@@ -181,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer  "position",                             :default => 0
     t.integer  "lft"
     t.integer  "rgt"
+    t.string   "redirect"
   end
 
   add_index "pages", ["class_name"], :name => "pages_class_name"
@@ -189,11 +137,6 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
   add_index "pages", ["site_id"], :name => "index_pages_on_site_id"
   add_index "pages", ["slug", "parent_id"], :name => "pages_child_slug"
   add_index "pages", ["virtual", "status_id"], :name => "pages_published"
-
-  create_table "product_page_fields", :force => true do |t|
-    t.integer "page_id"
-    t.decimal "price",   :precision => 10, :scale => 2
-  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id"

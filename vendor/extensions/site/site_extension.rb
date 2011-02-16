@@ -1,5 +1,6 @@
 # Uncomment this if you reference any of your controllers in activate
-# require_dependency 'application_controller'
+#require_dependency 'site_controller'
+
 
 class SiteExtension < Radiant::Extension
   version "1.0"
@@ -19,6 +20,15 @@ class SiteExtension < Radiant::Extension
 
     Page.send :include, SiteTags
     Page.send :acts_as_nested_set
+    
+    
+    Page.class_eval do
+      def url_with_redirect
+        self.redirect.blank? ? url_without_redirect : self.redirect
+      end
+    
+      alias_method_chain :url, :redirect
+    end
     
     
     ApplicationHelper.module_eval do
@@ -101,11 +111,14 @@ class SiteExtension < Radiant::Extension
 
       def add_custom_admin_assets
         include_stylesheet 'admin/custom_admin'
+        @meta ||= []
+        @meta << {:field => "redirect", :type => "text_field", :args => [{:class => 'textbox', :maxlength => 200}]}
       end
     end
     
     
     SiteController.class_eval do
+    
       def export_pdf
         page = Page.find(params[:id])
         page_url = page.full_url + '?style=print'
