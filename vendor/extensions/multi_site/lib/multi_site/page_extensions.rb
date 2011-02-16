@@ -29,4 +29,9 @@ module MultiSite::PageExtensions
       "/"
     end
   end
+  
+  
+  def full_url
+    "http://#{self.site.base_domain}#{self.url}"
+  end
 end

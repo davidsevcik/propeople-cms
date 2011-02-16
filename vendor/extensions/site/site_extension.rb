@@ -92,8 +92,7 @@ class SiteExtension < Radiant::Extension
       end
     end
     
-    
-    
+        
     
     admin.pages.edit.add :part_controls, 'admin/page_parts/additional_part_controls'
 
@@ -102,6 +101,17 @@ class SiteExtension < Radiant::Extension
 
       def add_custom_admin_assets
         include_stylesheet 'admin/custom_admin'
+      end
+    end
+    
+    
+    SiteController.class_eval do
+      def export_pdf
+        page = Page.find(params[:id])
+        page_url = page.full_url + '?style=print'
+        pdf_file = "/tmp/#{page.slug}_#{Time.now.to_i}.pdf"
+        `wkhtmltopdf #{page_url} #{pdf_file}`
+        send_file(pdf_file, :type=>"application/pdf")
       end
     end
   end
