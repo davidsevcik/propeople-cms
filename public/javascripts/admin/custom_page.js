@@ -36,7 +36,7 @@ document.observe("dom:loaded", function() {
     if (buttons_area) {
       var statuses = ['1', '20', '21'];
     
-      if ($.inArray($('page_status_id').getValue(), statuses) != -1) {
+      if (statuses.indexOf($('page_status_id').getValue()) != -1) {
         buttons_area.insert({
           top: '<input type="submit" class="button" name="continue" value="Publikovat" id="publish_button" accesskey="p" />'
         });
