@@ -1,0 +1,4 @@
+#!/bin/sh
+git pull
+touch tmp/restart.txt
+chown alcaplast:alcaplast * -R
