@@ -7,10 +7,7 @@ class ArchiveExtension < Radiant::Extension
   url "http://dev.radiantcms.org/"
     
   def activate
-    ArchivePage
-    ArchiveYearIndexPage
-    ArchiveMonthIndexPage
-    ArchiveDayIndexPage
+  
   end
   
   def deactivate
