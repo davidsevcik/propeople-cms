@@ -110,6 +110,7 @@ class SiteExtension < Radiant::Extension
       def add_custom_admin_assets
         include_stylesheet 'admin/custom_admin'
         @meta ||= []
+        @meta << {:field => "system_name", :type => "text_field", :args => [{:class => 'textbox', :maxlength => 200}]}
         @meta << {:field => "redirect", :type => "text_field", :args => [{:class => 'textbox', :maxlength => 200}]}
       end
     end

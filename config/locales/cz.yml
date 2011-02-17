@@ -8,8 +8,8 @@ cz:
         invalid: 'neplatný formát' #invalid_format
         not_a_number: 'musí být číslo' # must be number
         taken: 'toto jméno je již použito' # name_in_use
-        too_long: 'maximálně {{count}} znaků' # character_limit
-        too_short: 'mininálně {{count}} znaků' # character_minimum
+        too_long: 'maximálně %{count} znaků' # character_limit
+        too_short: 'mininálně %{count} znaků' # character_minimum
       models:
         page:
           attributes:
@@ -33,7 +33,7 @@ cz:
   add_tab: 'Přidat záložku'
   admin: 'Administrátor'
   available_tags: 'Použitelné tagy'
-  available_tags_for: 'Tagy použitelné pro {{name}}'
+  available_tags_for: 'Tagy použitelné pro %{name}'
   body: 'Tělo'
   breadcrumb: 'Název v menu'
   buttons:
@@ -131,10 +131,10 @@ cz:
   remove_user: 'Smazat uživatele'
   required: 'Vyžadováno'
   resource_controller:
-    not_found: "{{humanized_model_name}} nebyl nalezen."
-    removed: "{{humanized_model_name}} byl smazán."
-    saved: "{{humanized_model_name}} byl uložen."
-    update_conflict: "{{humanized_model_name}} byl současně upraven jiných uživatelem. Změny nemohly být uloženy kvůli hrozící ztrátě dat."
+    not_found: "Záznam typu %{humanized_model_name} nebyl nalezen."
+    removed: "Záznam typu %{humanized_model_name} byl smazán."
+    saved: "Záznam typu %{humanized_model_name} byl uložen."
+    update_conflict: "Záznam typu %{humanized_model_name} byl současně upraven jiných uživatelem. Změny nemohly být uloženy kvůli hrozící ztrátě dat."
     validation_errors: "Některé položky ve fromuláři jsou zadány chybně."
   reviewed: 'Ověřeno'
   roles: 'Role'
@@ -207,7 +207,7 @@ cz:
   cf_close: 'Zavřít'
   cf_custom_fields: 'Volitelná pole'
   cf_delete: 'Snazat'
-  cf_delete_confirm: 'Opravdu chcete smazat volitelné pole "{{name}}"?'
+  cf_delete_confirm: 'Opravdu chcete smazat volitelné pole "%{name}"?'
   cf_enter_new: 'Zadat nové'
   cf_name: 'Jméno'
   cf_select: ' - vyberte - '
@@ -271,7 +271,7 @@ cz:
     add_to_bucket: 'Vložit do kyklíku'
     asset: 'Přiíloha'
     asset_edit_title: 'Editovat přílohu'
-    asset_errors: 'Promiňte. {{errors}}'
+    asset_errors: 'Promiňte. %{errors}'
     asset_page_attachment_note: 'Přiložené soubory. Mohou být vloženy do textu tažením myši nebo pomocí tagu <code>&lt;r:assets:each /&gt;</code>'
     asset_note: 'Přiložené soubory. '
     assets_explanation: 'Soubory a obrázky mohou být nahrány a poté přiloženy ke stránkám. Klikněte na jméno souboru pro editaci nebo klikněte na <code>Smazat</code> pro odstranění.'
@@ -289,7 +289,7 @@ cz:
     confirm_remove_asset: 'Opravdu chcete <strong class="warning">natrvalo smazat</strong> tyto soubory?'
     confirm_remove_from_page: 'Opravdu chcete odebrat tento soubor ze stránky?'
     delete_asset: 'Smazat soubor'
-    edit_asset: 'Editovat {{asset}}'
+    edit_asset: 'Editovat %{asset}'
     empty_bucket: 'Kyblík je prázdný'
     filename: 'Název souboru'
     images: 'Obrázky'
@@ -334,3 +334,4 @@ cz:
         
   sites: Weby
   redirect: Přesměrování
+  system_name: Systémový název

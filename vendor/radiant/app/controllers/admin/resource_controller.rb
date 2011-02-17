@@ -173,7 +173,8 @@ class Admin::ResourceController < ApplicationController
     alias :models_symbol :plural_model_symbol
 
     def humanized_model_name
-      t(model_name.underscore.downcase) || model_name
+      mn = t(model_name.underscore.downcase)
+      mn.blank? ? model_name : mn
     end
 
     def continue_url(options)

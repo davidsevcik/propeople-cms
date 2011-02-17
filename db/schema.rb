@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer  "lft"
     t.integer  "rgt"
     t.string   "redirect"
+    t.string   "system_name"
   end
 
   add_index "pages", ["class_name"], :name => "pages_class_name"

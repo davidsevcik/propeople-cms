@@ -98,6 +98,7 @@ module CustomPage
 			    page.parent = lang_parent
 			    page.title = "[#{self.title}]"
 			    page.breadcrumb = page.title
+			    page.system_name = self.system_name
 			    page.slug = "translate-#{self.id}-#{lang}"
 			    page.status = notify ? Status[:for_translation_notify] : Status[:for_traslation]
 			    page.multilingual_group_id = self.multilingual_group_id
