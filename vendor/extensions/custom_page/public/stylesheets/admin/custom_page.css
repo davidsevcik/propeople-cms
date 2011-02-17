@@ -46,7 +46,6 @@
 
 
 #translations {
-  clear: both;
   color: #333;
   background: #f5f1e2 url(/images/admin/vertical_tan_gradient.png) repeat-x top;
   margin: 10px 0;
@@ -54,6 +53,8 @@
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   overflow: hidden;
+  float: right; 
+  width: 49%;
 }
 #translations h3 {
   font-size: 16px;
@@ -95,5 +96,8 @@
 #translation_list { clear: both; }
 
 #site-indication { float:right; font-weight: bold; margin-top: -5px; }
+
+
+#attachments { float: left; width: 49%; }
 
 

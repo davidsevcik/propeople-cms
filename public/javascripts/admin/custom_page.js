@@ -36,6 +36,7 @@ document.observe("dom:loaded", function() {
     var buttons_area = page_form.down('.buttons');
 
     if (buttons_area) {
+      buttons_area.setStyle({clear: 'both'});
       var statuses = ['1', '20', '21'];
     
       if (statuses.indexOf($('page_status_id').getValue()) != -1) {
