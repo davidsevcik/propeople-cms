@@ -18,9 +18,7 @@ class SiteExtension < Radiant::Extension
   
   def activate
 
-    Page.send :include, SiteTags
-    Page.send :acts_as_nested_set
-    
+    Page.send :include, SiteTags    
     
     Page.class_eval do
       def url_with_redirect

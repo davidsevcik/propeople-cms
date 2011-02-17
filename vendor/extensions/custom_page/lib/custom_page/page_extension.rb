@@ -7,6 +7,7 @@ module CustomPage
     def self.included(base)
       base.class_eval do  
       
+        acts_as_nested_set
       	belongs_to :multilingual_group
       	before_save :check_translation
       	
