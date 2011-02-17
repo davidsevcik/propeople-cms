@@ -8,7 +8,7 @@ class NewsPage < Page
 
 
   def set_defaults
-    self.layout = Layout.find_by_name('news_entry')
+    self.layout = Layout.find_by_name('news')
     self.show_in_menu = false
     self.save!
     parts.create(:name => 'text', :content => '', :filter_id => 'CKEditor')
