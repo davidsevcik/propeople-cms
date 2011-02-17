@@ -4,3 +4,12 @@
 div.drawer { height: 10px; }
 div.drawer_handle { display: none; }
 .drawer_contents table.fieldset th.label { width: 100px; }
+
+table.fieldset td.field textarea {
+  width: 99.5%;
+  margin-right: 0;
+  font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
+  font-size: 100%;
+}
+
+.drawer_contents table.fieldset td.field input.textbox { font-size: 100%; }
