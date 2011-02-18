@@ -1,6 +1,8 @@
 module SiteTags
   include Radiant::Taggable
   include ActionView::Helpers::TagHelper
+  
+  class TagError < StandardError; end
 
   tag 'if_blank' do |tag|
     part_name = tag_part_name(tag)
@@ -76,6 +78,10 @@ module SiteTags
 
   tag 'page_id' do |tag|
     tag.locals.page.id
+  end
+  
+  tag 'url' do |tag|
+    tag.locals.page.url
   end
 
 
@@ -200,5 +206,32 @@ module SiteTags
     </ul>}
   end
   
+  
+  desc %{
+    Inside this tag all page related tags refer to the page found at the @url@ attribute.
+    @url@s may be relative or absolute paths.
+
+    *Usage:*
+
+    <pre><code><r:find url="value_to_find" system_name="name">...</r:find></code></pre>
+  }
+  tag 'find' do |tag|
+    url = tag.attr['url']
+    sys_name = tag.attr['system_name']
+    raise TagError.new("`find' tag must contain `url' or `system_name' attribute") if url.blank? && sys_name.blank?
+
+    if url
+      found = Page.find_by_url(absolute_path_for(tag.locals.page.url, url))
+    else # sys_name
+      conditions = {:system_name => sys_name}
+      conditions[:site_id] = Page.current_site.id if Page.respond_to?(:current_site)
+      found = Page.first(:conditions => conditions)
+    end
+      
+    if page_found?(found)
+      tag.locals.page = found
+      tag.expand
+    end
+  end
 
 end

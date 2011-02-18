@@ -9,7 +9,7 @@ module CustomPage
       
         acts_as_nested_set
       	belongs_to :multilingual_group
-      	before_save :check_translation
+      	before_validation :check_translation
       	
 
         def self.extended_page_type(options={})
@@ -69,7 +69,7 @@ module CustomPage
         
         
         def auto_slug
-          temp_slug = self.title.to_url
+          temp_slug = self.title.to_url.gsub(/[^a-z0-9-]/, '')
           self.slug = temp_slug
 
           i = 0

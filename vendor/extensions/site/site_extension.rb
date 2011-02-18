@@ -72,7 +72,8 @@ class SiteExtension < Radiant::Extension
 							status = Status.new(:id => id.to_i, :name => statuses[id.to_i].capitalize)
 							@@loaded_statuses << status
 						else
-							raise ActiveRecord::RecordNotFound.new("#{id} not found")
+							# ActiveRecord::RecordNotFound.new("Status with ID #{id} not found")
+							status = Status.new(:id => id.to_i, :name => "Unknown status ##{id}")
 						end
 					end					
 					status
