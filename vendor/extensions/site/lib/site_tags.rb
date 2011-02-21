@@ -233,5 +233,20 @@ module SiteTags
       tag.expand
     end
   end
+  
+  desc %{
+    Find nearest parent ArchivePage.
+
+    *Usage:*
+
+    <pre><code><r:nearest_archive /></code></pre>
+  }
+  tag 'nearest_archive' do |tag|
+    archive = tag.locals.page.self_and_ancestors.reverse.detect {|page| page.class_name == 'ArchivePage' }
+    if archive
+      tag.locals.page = archive
+      tag.expand
+    end
+  end
 
 end
