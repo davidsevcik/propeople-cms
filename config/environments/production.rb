@@ -23,4 +23,4 @@ config.action_controller.perform_caching             = true
 #   SiteController.cache_timeout = 12.hours
 # end
 
-ActionMailer::Base.delivery_method = :test
+ActionMailer::Base.delivery_method = :sendmail
