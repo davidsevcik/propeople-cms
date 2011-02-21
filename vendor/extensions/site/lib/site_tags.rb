@@ -244,6 +244,7 @@ module SiteTags
   tag 'nearest_archive' do |tag|
     archive = tag.locals.page.self_and_ancestors.reverse.detect {|page| page.class_name == 'ArchivePage' }
     if archive
+      tag.locals.archive_page = archive
       tag.locals.page = archive
       tag.expand
     end

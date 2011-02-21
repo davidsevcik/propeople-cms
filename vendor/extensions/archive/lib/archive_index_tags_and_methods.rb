@@ -10,7 +10,8 @@ module ArchiveIndexTagsAndMethods
     setup_date_parts
     page = tag.locals.page
     unless @year.nil?
-      Date.new((@year || 1).to_i, (@month || 1).to_i, (@day || 1).to_i).strftime(page.title)
+      #Date.new((@year || 1).to_i, (@month || 1).to_i, (@day || 1).to_i).strftime(page.title)
+      I18n.l(Date.new((@year || 1).to_i, (@month || 1).to_i, (@day || 1).to_i), :format => page.title)
     else
       page.title
     end
