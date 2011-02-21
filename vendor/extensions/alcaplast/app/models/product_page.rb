@@ -20,7 +20,7 @@ class ProductPage < Page
     parts.create(:name => 'nahradni_dily', :title => 'Náhradní díly', :content => '', :filter_id => 'CKEditor')
     parts.create(:name => 'montaz', :title => 'Montáž', :content => '', :filter_id => 'CKEditor')
     parts.create(:name => 'video', :title => 'Video', :content => '', :filter_id => 'CKEditor')
-    parts.create(:name => 'perex', :position => 99, :content => '', :filter_id => 'CKEditor')
+    parts.create(:name => 'perex', :position => 99, :content => '', :filter_id => '')
     
     fields.create(:name => 'Podnadpis')
   end
