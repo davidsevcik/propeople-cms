@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer "position",    :default => 0
     t.string  "base_domain"
     t.string  "language"
+    t.boolean "hidden",      :default => false
   end
 
   create_table "snippets", :force => true do |t|

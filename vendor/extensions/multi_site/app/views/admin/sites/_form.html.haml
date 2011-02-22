@@ -24,6 +24,9 @@
         = f.text_field :homepage_id
         - if f.object.new_record?
           (A new homepage will automatically be created if not specified.)
+      %p
+        %label{:for => "hidden"} Skrytá
+        = f.check_box :hidden
 
   - render_region :form_bottom do |form_bottom|
     - form_bottom.edit_buttons do
