@@ -1,7 +1,7 @@
 class Site < ActiveRecord::Base
   acts_as_list
   default_scope :order => 'position ASC'
-  scope :visible, :conditions => {:hidden => false}
+  named_scope :visible, :conditions => {:hidden => false}
  
 
   class << self
