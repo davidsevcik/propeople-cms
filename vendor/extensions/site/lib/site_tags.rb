@@ -164,6 +164,7 @@ module SiteTags
     end 
     
     last_level = min_level
+    hidden_level = 0
     tree = ''
     
     if @all_pages.nil?
