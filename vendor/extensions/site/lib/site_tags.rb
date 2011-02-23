@@ -164,7 +164,7 @@ module SiteTags
     end 
     
     last_level = min_level
-    hidden_level = 0
+    hidden_level = nil
     tree = ''
     
     if @all_pages.nil?
@@ -173,24 +173,26 @@ module SiteTags
     end       
     
     Page.each_with_level(@all_pages) do |page, level|  
-      if page.left >= @root.left && page.right <= @root.right &&
-          level >= min_level && (!@depth || level < @depth) &&  
-          (@show_all || page.show_in_menu?) && 
-          !page.virtual? && page.published? && !page.part("no-map")
-        
-          
-        level_diff = level - last_level    
-        
-        if level_diff == 0
-          tree += "</li>\n"
-        elsif level_diff == 1
-          tree += "<ul>\n"
-        elsif level_diff < 0
-          tree += "</li>\n" + ("</ul>\n</li>\n" * level_diff.abs)
+      if page.left >= @root.left && page.right <= @root.right && level >= min_level && (!@depth || level < @depth)         
+        if (@show_all || page.show_in_menu?) && !page.virtual? && page.published? && !page.part("no-map")                                           
+          unless hidden_level && hidden_level < level 
+            level_diff = level - last_level  
+            last_level = level
+            hidden_level = nil
+            
+            if level_diff == 0      # stejna uroven
+              tree += "</li>\n"
+            elsif level_diff == 1   # potomek
+              tree += "<ul>\n"
+            elsif level_diff < 0    # jina vetev
+              tree += "</li>\n" + ("</ul>\n</li>\n" * (level_diff.abs))
+            end
+               
+            tree += "<li#{page == tag.locals.page ? ' class="current"' : ''}><a href=\"#{page.url}\">#{h(page.breadcrumb)}</a>"            
+          end         
+        else
+          hidden_level ||= level         
         end
-           
-        tree += "<li#{page == tag.locals.page ? ' class="current"' : ''}><a href=\"#{page.url}\">#{h(page.breadcrumb)}</a>" 
-        last_level = level
       end
     end
     
