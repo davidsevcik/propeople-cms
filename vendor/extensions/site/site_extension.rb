@@ -22,7 +22,15 @@ class SiteExtension < Radiant::Extension
     
     Page.class_eval do
       def url_with_redirect
-        self.redirect.blank? ? url_without_redirect : self.redirect
+        if self.redirect.blank?  
+          url_without_redirect 
+        else
+          if self.redirect =~ /^system_name:(.+)$/
+            Page.current_site.pages.find_by_system_name($1).url
+          else
+            self.redirect
+          end
+        end
       end
     
       alias_method_chain :url, :redirect

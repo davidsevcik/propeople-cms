@@ -40,12 +40,14 @@ module MultiSite::PagesControllerExtensions
       @site = Site.first(:order => "position ASC") # If there is a site defined
     end
     
+    Page.current_site = @site
     @homepage = @site.homepage
-    logger.info "SITE (load_site)" + @site.inspect
+    #logger.info "SITE (load_site)" + @site.inspect
   end
   
   def change_site(site)
     @site = site.is_a?(Site) ? site : Site.find(site)
+    Page.current_site = @site
     @homepage = @site.homepage
     session[:root_page_id] = @homepage.id
   end
