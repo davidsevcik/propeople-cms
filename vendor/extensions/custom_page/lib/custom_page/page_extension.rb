@@ -93,7 +93,8 @@ module CustomPage
 			
 			    lang_parent ||= site.homepage
 			
-		      page = self.class_name.blank? ? Page.new : self.class_name.constantize.new		
+		      page = Page.new
+		      page.class_name = self.class_name
 			    page.site = site
 			    page.parent = lang_parent
 			    page.title = "[#{self.title}]"
@@ -105,6 +106,8 @@ module CustomPage
 			    page.layout_id = self.layout_id
 			    page.multilingual_group_id = self.multilingual_group_id
 			    page.save!
+			    
+			    page.parts.clear
 			    
 			    self.parts.each do |prt|
 			      trans_part = page.parts.find_by_name(prt.name)
