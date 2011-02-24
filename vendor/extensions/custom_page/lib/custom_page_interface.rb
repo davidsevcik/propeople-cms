@@ -26,6 +26,8 @@ module CustomPageInterface
    	end
    	
    	
+   	protect_from_forgery :except => [:precreate, :translate_page] 
+   	
    	def precreate
       if params[:page_type].blank?
         page = model_class.new_with_defaults(config)
@@ -55,7 +57,7 @@ module CustomPageInterface
 
       redirect_to edit_admin_page_path(page)
     end
-    
+      
     
     def translate_page
       base_page = Page.find(params[:id])      
