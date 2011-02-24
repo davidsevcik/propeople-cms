@@ -4,6 +4,7 @@ module CustomPageInterface
       before_filter :add_custom_page_partials, :only => [:index, :edit]
       before_filter :load_languages, :only => [:index, :edit]
       before_filter :add_translation_partial, :only => [:edit]
+      protect_from_forgery :except => [:precreate, :translate_page]
       
       include InstanceMethods     
  
@@ -26,7 +27,7 @@ module CustomPageInterface
    	end
    	
    	
-   	protect_from_forgery :except => [:precreate, :translate_page] 
+   	
    	
    	def precreate
       if params[:page_type].blank?
