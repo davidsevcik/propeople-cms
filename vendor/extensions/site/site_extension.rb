@@ -26,7 +26,7 @@ class SiteExtension < Radiant::Extension
           url_without_redirect 
         else
           if self.redirect =~ /^system_name:(.+)$/
-            Page.current_site.pages.find_by_system_name($1).url
+            Page.current_site.pages.find_by_system_name($1).try(:url)
           else
             self.redirect
           end

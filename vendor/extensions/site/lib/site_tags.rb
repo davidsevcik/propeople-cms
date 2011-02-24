@@ -188,7 +188,7 @@ module SiteTags
               tree += "</li>\n" + ("</ul>\n</li>\n" * (level_diff.abs))
             end
                
-            tree += "<li#{page == tag.locals.page ? ' class="current"' : ''}><a href=\"#{page.url}\">#{h(page.breadcrumb)}</a>"            
+            tree += "<li#{page == tag.locals.page ? ' class="current"' : ''}><a href=\"#{page.url}\"><span>#{h(page.breadcrumb)}</span></a>"            
           end         
         else
           hidden_level ||= level         
