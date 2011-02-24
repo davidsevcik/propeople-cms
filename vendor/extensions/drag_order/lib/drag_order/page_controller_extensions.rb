@@ -22,7 +22,7 @@ module DragOrder::PageControllerExtensions
     
     put_page
     
-    solve_slug_conflicts if copying? || new_parent_different?
+    solve_slug_conflicts if copying?  #|| new_parent_different?
     
     @page.save!
     
