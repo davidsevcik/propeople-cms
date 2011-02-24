@@ -2,7 +2,7 @@
   %h3 Překlady 
   %ol#translation_list
     - @sites.each do |site|
-      - unless @site == site
+      - unless @page.site == site
         %li
           %strong= @languages[site.language] + ': '
           - translation = @page.translation_for_site(site)
