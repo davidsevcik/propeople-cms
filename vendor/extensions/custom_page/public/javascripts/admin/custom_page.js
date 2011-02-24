@@ -55,6 +55,6 @@ document.observe("dom:loaded", function() {
     }
 
     $('published_at').remove();
-    $('page_class_name').down(0).remove();
+    //$('page_class_name').down(0).remove();
   }
 });

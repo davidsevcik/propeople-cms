@@ -99,11 +99,12 @@ module CustomPage
 			    page.title = "[#{self.title}]"
 			    page.breadcrumb = page.title
 			    page.system_name = self.system_name
+			    page.redirect = self.redirect
 			    page.slug = "translate-#{self.id}-#{lang}"
 			    page.status = notify ? Status[:for_translation_notify] : Status[:for_translation]
+			    page.layout_id = self.layout_id
 			    page.multilingual_group_id = self.multilingual_group_id
 			    page.save!
-			    debugger
 			    
 			    self.parts.each do |prt|
 			      trans_part = page.parts.find_by_name(prt.name)
@@ -119,9 +120,24 @@ module CustomPage
 			      end
 			    end
 			    
-			    debugger
+			    self.fields.each do |field|
+			      trans_field = page.fields.find_by_name(field.name)
+			      if trans_field
+			        trans_field.content = field.content
+			        trans_field.save!
+			      else
+			        page.fields.create(:name => field.name, :content => field.content)
+			      end
+			    end
 			    
-			    self.attachments.find_all_by_copy_to_translation(true).each do |attachment|
+			    
+			    attachments_to_copy = self.attachments.find_all_by_copy_to_translation(true)
+			    
+			    if self.class_name = 'ProductPage' && self.attachments.first.try(:copy_to_translation) == false   
+			      attachments_to_copy = attachments_to_copy.insert(0, self.attachments.first) 
+			    end
+			    
+			    attachments_to_copy.each do |attachment|
 			      file = ActionController::TestUploadedFile.new("public" + attachment.public_filename, attachment.content_type)
             page.attachments.create(
               :uploaded_data => file, 
