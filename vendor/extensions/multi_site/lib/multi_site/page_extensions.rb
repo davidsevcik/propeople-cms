@@ -38,6 +38,6 @@ module MultiSite::PageExtensions
   
   
   def set_site
-    self.site = Page.current_site
+    self.site ||= Page.current_site
   end
 end
