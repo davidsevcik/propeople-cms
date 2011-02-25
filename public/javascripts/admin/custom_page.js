@@ -54,6 +54,7 @@ document.observe("dom:loaded", function() {
     }
 
     $('published_at').remove();
-    //$('page_class_name').down(0).remove();
+    var firstOption = $('page_class_name').down(0)
+    if (firstOption.value == '') firstOption.remove();
   }
 });
