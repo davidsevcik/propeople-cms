@@ -102,7 +102,7 @@ class SiteExtension < Radiant::Extension
     
     PagePart.class_eval do 
       acts_as_list :scope => :page
-      #default_scope :order => 'position'
+      default_scope :order => 'position'
     
       def after_initialize
         #nothing
