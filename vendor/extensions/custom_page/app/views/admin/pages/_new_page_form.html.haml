@@ -1,6 +1,6 @@
 #new_page_popup{:style => 'display:none'}
   - form_tag(url_for(@page ? {:action => 'translate_page'} : {:action => 'precreate'}), :id => 'new_page_form', :method => 'post') do
-    %input{:name => 'parent_id', :type => 'hidden', :value => ''}
+    %input#parent_id{:name => 'parent_id', :type => 'hidden', :value => ''}
     %table
       %tr
         %th= label_tag 'page_title', 'Titulek'
