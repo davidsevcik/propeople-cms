@@ -19,8 +19,8 @@ config.action_controller.perform_caching             = true
 # config.action_mailer.raise_delivery_errors = false
 
 # Cache your content for a longer time, the default is 5.minutes
-# config.after_initialize do 
-#   SiteController.cache_timeout = 12.hours
-# end
+config.after_initialize do 
+  SiteController.cache_timeout = 24.hours
+end
 
 ActionMailer::Base.delivery_method = :sendmail

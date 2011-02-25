@@ -4,6 +4,7 @@ module MultiSite::PageExtensions
       alias_method_chain :url, :sites
       mattr_accessor :current_site
       belongs_to :site
+      before_create :set_site
     }
     base.extend ClassMethods
     class << base
@@ -33,5 +34,10 @@ module MultiSite::PageExtensions
   
   def full_url
     "http://#{self.site.base_domain}#{self.url}"
+  end
+  
+  
+  def set_site
+    self.site = Page.current_site
   end
 end
