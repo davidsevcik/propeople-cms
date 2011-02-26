@@ -210,6 +210,43 @@ module SiteTags
   end
   
   
+  tag 'archive_menu' do |tag|
+    archive_page = tag.locals.page.self_and_ancestors.find_by_class_name('ArchivePage') 
+    archive_page_url = archive_page.url
+    posts = archive_page.children.all(:order => 'published_at DESC')
+    last_year = 0
+    last_month = 0
+    output = ''
+    
+    posts.each do |post|
+      if post.published_at.year != last_year
+        output += "</ul>\n</li>\n" unless output.blank?
+        output += "<li><a href=\"#{archive_page_url}#{post.published_at.year}\">#{post.published_at.year}</a>\n<ul>\n"           
+      end
+      
+      if post.published_at.year != last_year || post.published_at.month != last_month
+        last_month = post.published_at.month    
+        last_year = post.published_at.year
+        month_l = I18n.l(post.published_at, :format => '%B')
+        output += "<li><a href=\"#{archive_page_url}#{last_year}/#{'%02d' % last_month}\">#{month_l}</a></li>\n"
+      end
+    end
+    
+    output += "</ul>\n</li>\n" unless output.blank?
+  
+    if tag.attr
+      html_options = tag.attr.stringify_keys
+      tag_options = tag_options(html_options)
+    else
+      tag_options = ''
+    end
+    
+    %{<ul#{tag_options}>
+    #{output}
+    </ul>}   
+  end
+  
+  
   desc %{
     Inside this tag all page related tags refer to the page found at the @url@ attribute.
     @url@s may be relative or absolute paths.

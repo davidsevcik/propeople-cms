@@ -7,6 +7,7 @@ module MultiSite::SiteControllerExtensions
   
   def set_site
     Page.current_site = Site.find_for_host(request.host)
+    I18n.locale = Page.current_site.language
     true
   end
 end
