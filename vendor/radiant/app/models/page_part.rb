@@ -1,7 +1,8 @@
 class PagePart < ActiveRecord::Base
   
   # Default Order
-  default_scope :order => 'name'
+  acts_as_list :scope => :page
+  default_scope :order => 'position'
   
   # Associations
   belongs_to :page
