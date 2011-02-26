@@ -274,6 +274,31 @@ module SiteTags
     end
   end
   
+  
+  desc %{
+    Aggregates the children of multiple URLs using the @urls@ attribute.
+    Useful for combining many different sections/categories into a single
+    feed or listing.
+    
+    *Usage*:
+    
+    <pre><code><r:aggregate urls="/section1; /section2; /section3" system_names="name; name2"> ... </r:aggregate></code></pre>
+  }
+  tag "aggregate" do |tag|
+    raise "`urls' or system_names' attribute required" unless tag.attr["urls"] || tag.attr["system_names"] 
+    if tag.attr["urls"]
+      urls = tag.attr["urls"].split(";").map(&:strip).reject(&:blank?).map { |u| clean_url u }
+      parent_ids = urls.map {|u| Page.find_by_url(u) }.map(&:id)
+    else
+      names = tag.attr["system_names"].split(";").map(&:strip).reject(&:blank?)
+      parent_ids = names.map {|u| Page.find_by_system_name(u) }.map(&:id)
+    end
+    
+    tag.locals.parent_ids = parent_ids
+    tag.expand
+  end
+  
+  
   desc %{
     Find nearest parent ArchivePage.
 
