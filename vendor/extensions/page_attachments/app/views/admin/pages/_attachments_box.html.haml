@@ -42,7 +42,8 @@
             %img{:src => '/images/admin/minus.png', :alt => 'storno'}
         %tr
           %th  
+            %label Kopírovat při překladu 
           %td
-            %input{:type => 'checkbox', :name => 'page[attachments_attributes][][copy_to_translation]',  :value => '1', :checked => true}
-            %label Kopírovat při překladu
+            %input{:type => 'radio', :name => 'page[attachments_attributes][][copy_to_translation]', :value => '1', :checked => true} Ano
+            %input{:type => 'radio', :name => 'page[attachments_attributes][][copy_to_translation]', :value => '0'} Ne
     

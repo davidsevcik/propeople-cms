@@ -13,7 +13,7 @@ class PageAttachment < ActiveRecord::Base
              :foreign_key => 'updated_by'
   belongs_to :page
   
-  attr_accessible :title, :description, :flag, :position
+  attr_accessible :title, :description, :flag, :position, :copy_to_translation
 
   def short_filename(wanted_length = 15, suffix = ' ...')
           (self.filename.length > wanted_length) ? (self.filename[0,(wanted_length - suffix.length)] + suffix) : self.filename

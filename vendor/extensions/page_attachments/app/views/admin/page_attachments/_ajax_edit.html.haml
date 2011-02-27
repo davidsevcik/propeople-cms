@@ -25,6 +25,8 @@
         = select_tag "page[attachments_attributes][#{params[:list_id]}][flag]", flag_options, :id => 'flag_select'
   %tr
     %th  
+      %label Kopírovat při překladu 
     %td
-      %input{:type => 'checkbox', :name => 'page[attachments_attributes][#{params[:list_id]}][copy_to_translation]', :value => '1', :checked => @page_attachment.copy_to_translation?}
-      %label Kopírovat při překladu     
+      %input{:type => 'radio', :name => "page[attachments_attributes][#{params[:list_id]}][copy_to_translation]", :value => '1', :checked => @page_attachment.copy_to_translation?} Ano
+      %input{:type => 'radio', :name => "page[attachments_attributes][#{params[:list_id]}][copy_to_translation]", :value => '0', :checked => !@page_attachment.copy_to_translation?} Ne
+      
