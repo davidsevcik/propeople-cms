@@ -26,17 +26,23 @@
             %label Popisek
           %td
             %input{:size => '60', :name => 'page[attachments_attributes][][description]'}
-        %tr
-          %th
-            %label Příznak
-          %td
-            - flag_options = options_for_select([['žádný', '']] + PageAttachment.flags.map {|flag| [flag, flag]} + [['nový příznak', 'new_flag']])
-            = select_tag "page[attachments_attributes][][flag]", flag_options, :class => 'flag_select'
-            %input{:name => 'new_flag', :style => 'display:none;'}
+        -#
+          %tr
+            %th
+              %label Příznak
+            %td
+              - flag_options = options_for_select([['žádný', '']] + PageAttachment.flags.map {|flag| [flag, flag]} + [['nový příznak', 'new_flag']])
+              = select_tag "page[attachments_attributes][][flag]", flag_options, :class => 'flag_select'
+              %input{:name => 'new_flag', :style => 'display:none;'}
         %tr
           %th
             %label Soubor
           %td
             %input{:type => 'file', :name => 'page[attachments_attributes][][uploaded_data]'}
             %img{:src => '/images/admin/minus.png', :alt => 'storno'}
+        %tr
+          %th  
+          %td
+            %input{:type => 'checkbox', :name => 'page[attachments_attributes][][copy_to_translation]', :checked => true}
+            %label Kopírovat při překladu
     

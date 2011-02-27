@@ -16,10 +16,15 @@
       %label{:for => 'description_input'} Popisek
     %td
       %input#description_input{:size => '60', :name => "page[attachments_attributes][#{params[:list_id]}][description]", :value => @page_attachment.description}
+  -#
+    %tr
+      %th
+        %label{:for => 'flag_select'} Příznak
+      %td
+        - flag_options = options_for_select([['žádný', '']] + @flags.map {|flag| [flag, flag]} + [['nový příznak', 'new_flag']], @page_attachment.flag)
+        = select_tag "page[attachments_attributes][#{params[:list_id]}][flag]", flag_options, :id => 'flag_select'
   %tr
-    %th
-      %label{:for => 'flag_select'} Příznak
+    %th  
     %td
-      - flag_options = options_for_select([['žádný', '']] + @flags.map {|flag| [flag, flag]} + [['nový příznak', 'new_flag']], @page_attachment.flag)
-      = select_tag "page[attachments_attributes][#{params[:list_id]}][flag]", flag_options, :id => 'flag_select'
-      
+      %input{:type => 'checkbox', :name => 'page[attachments_attributes][][copy_to_translation]', :checked => @page_attachment.copy_to_translation?}
+      %label Kopírovat při překladu     
