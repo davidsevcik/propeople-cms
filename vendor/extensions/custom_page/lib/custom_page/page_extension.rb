@@ -97,7 +97,7 @@ module CustomPage
 		      page.class_name = self.class_name
 			    page.site = site
 			    page.parent = lang_parent
-			    page.title = "[#{self.title}]"
+			    page.title = "#{self.title}"
 			    page.breadcrumb = page.title
 			    page.system_name = self.system_name
 			    page.redirect = self.redirect
