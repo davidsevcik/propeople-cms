@@ -26,5 +26,5 @@
   %tr
     %th  
     %td
-      %input{:type => 'checkbox', :name => 'page[attachments_attributes][][copy_to_translation]', :checked => @page_attachment.copy_to_translation?}
+      %input{:type => 'checkbox', :name => 'page[attachments_attributes][#{params[:list_id]}][copy_to_translation]', :checked => @page_attachment.copy_to_translation?}
       %label Kopírovat při překladu     
