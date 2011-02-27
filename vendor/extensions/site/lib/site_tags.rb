@@ -124,7 +124,8 @@ module SiteTags
         div = '<div class="col' + col_index.to_s + '-wrap"'
         div += ' style="width:' + distribution[col_index] + '"' if distribution
         result << div + '>'
-        result << '<div class="col' + col_index.to_s + '">'
+        result << '<div class="col' + col_index.to_s + '">' 
+        result << "<div class=\"headline\"><span>#{part.title}</span></div>" unless part.title.blank? 
         result << tag.globals.page.render_snippet(part)
         result << '</div>'
         result << '</div>'
