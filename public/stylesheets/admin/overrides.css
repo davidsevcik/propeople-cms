@@ -1,1 +1,3 @@
 /* Make your custom overrides here. This file will not be updated by Radiant */
+
+#settings_index .label { width: 200px; display: block;}

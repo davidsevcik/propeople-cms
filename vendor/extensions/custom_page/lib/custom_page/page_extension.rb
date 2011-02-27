@@ -73,7 +73,7 @@ module CustomPage
           self.slug = temp_slug
 
           i = 0
-          while self.siblings.any? {|sibling| sibling.slug == self.slug }
+          while self.parent.children.any? {|sibling| sibling.slug == self.slug }
             i += 1
             self.slug = temp_slug + "-#{i}"
           end
@@ -97,7 +97,7 @@ module CustomPage
 		      page.class_name = self.class_name
 			    page.site = site
 			    page.parent = lang_parent
-			    page.title = "#{self.title}"
+			    page.title = self.title
 			    page.breadcrumb = page.title
 			    page.system_name = self.system_name
 			    page.redirect = self.redirect

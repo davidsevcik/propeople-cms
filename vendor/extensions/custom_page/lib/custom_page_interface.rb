@@ -47,24 +47,31 @@ module CustomPageInterface
       page.status ||= Status['draft']
       page.site = page.parent.site if page.parent
       page.layout ||= Layout.find_by_name("page")
-      page.create_multilingual_group 
-      page.save!
-      
-      if params[:multilingual]
-      	params[:multilingual].each_pair do |lang, flags|
-      		page.create_translation(lang, !flags[:notify].nil?) if flags[:create]			
-      	end
-      end     
-
-      redirect_to edit_admin_page_path(page)
+      #page.create_multilingual_group 
+      if page.save      
+        if params[:multilingual]
+        	params[:multilingual].each_pair do |lang, flags|
+        		page.create_translation(lang, !flags[:notify].nil?) if flags[:create]			
+        	end
+        end     
+        redirect_to edit_admin_page_path(page)
+      else
+        flash[:error] = "Nepodařilo se založit stránku. Server vrátil:<br /><code>#{h(page.errors.inspect)}</code>"                    
+        redirect_to admin_pages_path
+      end
     end
       
     
     def translate_page
       base_page = Page.find(params[:id])      
       translation = base_page.create_translation(params[:language])
-      change_site(translation.site)
-      redirect_to edit_admin_page_path(translation)
+      if translation
+        change_site(translation.site)
+        redirect_to edit_admin_page_path(translation)
+      else
+        flash[:error] = "Nepodařilo se přeložit stránku."                    
+        redirect_to admin_pages_path
+      end
     end
    
    
