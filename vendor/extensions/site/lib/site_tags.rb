@@ -291,7 +291,7 @@ module SiteTags
       parent_ids = urls.map {|u| Page.find_by_url(u) }.map(&:id)
     else
       names = tag.attr["system_names"].split(";").map(&:strip).reject(&:blank?)
-      parent_ids = names.map {|u| Page.find_by_system_name(u) }.map(&:id)
+      parent_ids = names.map {|u| Page.find_by_system_name_and_site_id(u, Page.current_site.id) }.map(&:id)
     end
     
     tag.locals.parent_ids = parent_ids
