@@ -130,6 +130,7 @@ class SiteExtension < Radiant::Extension
       def export_pdf
         page = Page.find(params[:id])
         page_url = page.full_url + '?style=print'
+        page_url += '#' + params[:selected] if params[:selected]
         pdf_file = "/tmp/#{page.slug}_#{Time.now.to_i}.pdf"
         `wkhtmltopdf #{page_url} #{pdf_file}`
         send_file(pdf_file, :type=>"application/pdf")
