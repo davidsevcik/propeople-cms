@@ -115,7 +115,12 @@ module SiteTags
 
       distribution = case col_index
                        when 3 then {3 => '100%'}
-                       when 2 then {2 => '40%', 3 => '60%'}
+                       when 2
+                         if row[1].key?(1) && row[1].key?(2)
+                           {2 => '40%', 3 => '60%'}
+                         else
+                           {2 => '80%', 3 => '20%'}
+                         end
                        else nil
                      end
 
