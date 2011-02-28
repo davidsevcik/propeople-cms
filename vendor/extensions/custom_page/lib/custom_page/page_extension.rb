@@ -104,6 +104,7 @@ module CustomPage
 			    page.slug = "translate-#{self.id}-#{lang}"
 			    page.status = notify ? Status[:for_translation_notify] : Status[:for_translation]
 			    page.layout_id = self.layout_id
+			    page.show_in_menu = self.show_in_menu?
 			    if self.multilingual_group_id.nil?
 			      self.create_multilingual_group 
             self.save!
