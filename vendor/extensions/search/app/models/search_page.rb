@@ -148,7 +148,7 @@ Optionally allows setting the CSS class of the button and text inputs for format
     button_class = tag.attr['button_class'].nil? ? "" : " class=\"#{tag.attr['button_class']}\""
     box_class = tag.attr['box_class'].nil? ? "" : " class=\"#{tag.attr['box_class']}\""
     submit = "<input#{button_class} value=\"#{tag.attr['submit'] || "Search"}\" type=\"submit\" />"
-    url = tag.attr['url'].nil? ? self.url.chop : tag.attr['url']
+    url = tag.attr['url'].nil? ? (Page.current_site.pages.find_by_class_name('SearchPage').try(:url) || self.url) : tag.attr['url']
     exclude_pages_input = %{<input type="hidden" name="exclude_pages" value="#{CGI.escapeHTML(tag.attr['exclude_pages'])}" />}
     @query ||= ""
     content = %{<form action="#{url}" method="get" id="search_form">#{exclude_pages_input}<p>#{label}<input type="text"#{box_class} id="q" name="q" value="#{CGI.escapeHTML(@query)}" size="15" alt="search"/> #{submit}</p></form>}
