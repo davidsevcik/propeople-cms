@@ -24,10 +24,11 @@ module MultiSite::PageExtensions
   end
   
   def url_with_sites
-    if parent?
-      parent.child_url(self)
+    @url_with_sites ||= if parent?
+      #parent.child_url(self)
+      '/' + self_and_ancestors[1..-1].map(&:slug).join('/') + '/'   
     else
-      "/"
+      '/'
     end
   end
   
