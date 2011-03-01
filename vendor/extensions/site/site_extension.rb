@@ -132,8 +132,11 @@ class SiteExtension < Radiant::Extension
         page_url = page.full_url + '?style=print'
         page_url += '#' + params[:selected] if params[:selected]
         pdf_file = "/tmp/#{page.slug}_#{Time.now.to_i}.pdf"
-        `wkhtmltopdf #{page_url} #{pdf_file}`
-        send_file(pdf_file, :type=>"application/pdf")
+        if system("wkhtmltopdf #{page_url} #{pdf_file}")
+          send_file(pdf_file, :type=>"application/pdf")
+        else
+          render :inline => '<h1>Omlouváme se</h1><p>PDF se nepodařilo vygenerovat, zkuste to prosím znovu.</p>'    
+        end       
       end
     end
   end
